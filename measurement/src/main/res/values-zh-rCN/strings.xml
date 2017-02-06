@@ -1,0 +1,133 @@
+<resources>
+    <string name="title">度量转换</string>
+    <string-array name="measurement">
+        <item>长度</item>
+        <item>面积</item>
+        <item>体积</item>
+        <item>质量</item>
+        <item>温度</item>
+        <item>压力</item>
+        <item>功率</item>
+        <item>功能热</item>
+        <item>密度</item>
+        <item>力</item>
+        <item>时间</item>
+        <item>速度</item>
+        <item>数据</item>
+        <item>角度</item>
+    </string-array>
+    <string-array name="note_length_metric">
+        <item>光年</item>
+        <item>天文单位</item>
+        <item>千米</item>
+        <item>米</item>
+        <item>分米</item>
+        <item>厘米</item>
+        <item>毫米</item>
+        <item>微米</item>
+        <item>纳米</item>
+        <item>皮米</item>
+    </string-array>
+    <string-array name="note_length_british">
+        <item>海里</item>
+        <item>英里</item>
+        <item>弗隆</item>
+        <item>链</item>
+        <item>竿</item>
+        <item>英寻</item>
+        <item>码</item>
+        <item>英尺</item>
+        <item>手</item>
+        <item>英寸</item>
+    </string-array>
+    <string-array name="note_length_chinese">
+        <item>里</item>
+        <item>丈</item>
+        <item>尺</item>
+        <item>寸</item>
+        <item>分</item>
+        <item>厘</item>
+        <item>毫</item>
+    </string-array>
+
+    <string-array name="note_area_metric">
+        <item>平方千米</item>
+        <item>公顷</item>
+        <item>公亩</item>
+        <item>平方米</item>
+        <item>平方分米</item>
+        <item>平方厘米</item>
+        <item>平方毫米</item>
+    </string-array>
+    <string-array name="note_area_british">
+        <item>平方英里</item>
+        <item>英亩</item>
+        <item>平方链</item>
+        <item>平方竿</item>
+        <item>平方码</item>
+        <item>平方英尺</item>
+        <item>平方英寸</item>
+    </string-array>
+    <string-array name="note_area_chinese">
+        <item>顷</item>
+        <item>亩</item>
+        <item>分</item>
+        <item>厘</item>
+    </string-array>
+
+    <string-array name="note_volume_metric">
+        <item>立方千米</item>
+        <item>立方米</item>
+        <item>立方分米</item>
+        <item>立方厘米</item>
+        <item>立方毫米</item>
+    </string-array>
+    <string-array name="note_volume_british">
+        <item>英亩英尺</item>
+        <item>立方码</item>
+        <item>立方英尺</item>
+        <item>立方英尺</item>
+        <item>英桶</item>
+        <item>英加仑</item>
+        <item>英品脱</item>
+        <item>美桶</item>
+        <item>美加仑</item>
+        <item>美品脱</item>
+    </string-array>
+    <string-array name="note_volume_chinese">
+        <item>百升</item>
+        <item>十升</item>
+        <item>升</item>
+        <item>分升</item>
+        <item>厘升</item>
+        <item>毫升</item>
+    </string-array>
+
+    <string-array name="note_mass_metric">
+        <item>吨</item>
+        <item>公担</item>
+        <item>千克</item>
+        <item>克</item>
+        <item>克拉</item>
+        <item>毫克</item>
+        <item>微克</item>
+    </string-array>
+    <string-array name="note_mass_british">
+        <item>长吨</item>
+        <item>短吨</item>
+        <item>英担</item>
+        <item>美担</item>
+        <item>英石</item>
+        <item>磅</item>
+        <item>盎司</item>
+        <item>打兰</item>
+        <item>格令</item>
+    </string-array>
+    <string-array name="note_mass_chinese">
+        <item>担</item>
+        <item>斤</item>
+        <item>两</item>
+        <item>钱</item>
+        <item>分</item>
+    </string-array>
+</resources>

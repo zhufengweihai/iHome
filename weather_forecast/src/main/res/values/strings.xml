@@ -1,0 +1,50 @@
+<resources>
+    <string name="app_name">Weather Report</string>
+    <string name="title_activity_weather_forecast">WeatherForecastActivity</string>
+
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_example">Example action</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="alarm"> Alarm</string>
+    <string name="day_yesterday">Yesterday</string>
+    <string name="day_today">Today</string>
+    <string name="day_tomorrow">Tomorrow</string>
+    <string-array name="weeks">
+        <item>Sun</item>
+        <item>Mon</item>
+        <item>Tue</item>
+        <item>Wed</item>
+        <item>Thu</item>
+        <item>Fri</item>
+        <item>Sat</item>
+    </string-array>
+
+    <string name="air_quality">Air Quality</string>
+    <string name="pm2.5" translatable="false">PM2.5 μg/m³</string>
+    <string name="pm10" translatable="false">PM10 μg/m³</string>
+
+    <string name="wind_direction">Wind Direction</string>
+    <string name="wind_power">Wind Power</string>
+    <string name="sunrise">Sunrise</string>
+    <string name="sunset">Sunset</string>
+    <string name="humidity">Humidity</string>
+    <string name="apparent_temperature">Apparent Temperature</string>
+
+    <string name="index_comfort">Comfort Index</string>
+    <string name="index_dress">Dress Index</string>
+    <string name="index_cold">Cold Index</string>
+    <string name="index_ultraviolet">Ultraviolet Index</string>
+    <string name="index_car_wash">Car Wash Index</string>
+    <string name="index_sport">Sport Index</string>
+    <string name="index_date">Date Index</string>
+    <string name="index_umbrella">Umbrella Index</string>
+
+</resources>

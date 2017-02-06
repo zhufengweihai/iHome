@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                 xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                 xmlns:tools="http://schemas.android.com/tools"
+                                                 android:layout_width="match_parent"
+                                                 android:layout_height="match_parent"
+                                                 android:fitsSystemWindows="true"
+                                                 tools:context=".id.IdentityQueryActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:elevation="0dp">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@drawable/bg_title"/>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@color/colorForeground"
+            app:cardCornerRadius="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/idNoLabel"
+                    style="@style/label"
+                    android:layout_width="wrap_content"
+                    android:text="@string/id_no"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <EditText
+                    android:id="@+id/idNoEdit"
+                    style="@style/textview"
+                    android:layout_width="0dp"
+                    android:ems="18"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/idNoLabel"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:id="@+id/addressLabel"
+                    style="@style/label"
+                    android:layout_width="wrap_content"
+                    android:text="@string/id_address"
+                    app:layout_constraintEnd_toEndOf="@id/idNoLabel"
+                    app:layout_constraintTop_toBottomOf="@id/idNoLabel"/>
+
+                <TextView
+                    android:id="@+id/addressView"
+                    style="@style/textview"
+                    android:layout_width="0dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/addressLabel"
+                    app:layout_constraintTop_toBottomOf="@id/idNoLabel"/>
+
+                <TextView
+                    android:id="@+id/birthdayLabel"
+                    style="@style/label"
+                    android:layout_width="wrap_content"
+                    android:text="@string/id_birthday"
+                    app:layout_constraintEnd_toEndOf="@id/idNoLabel"
+                    app:layout_constraintTop_toBottomOf="@id/addressLabel"/>
+
+                <TextView
+                    android:id="@+id/birthdayView"
+                    style="@style/textview"
+                    android:layout_width="0dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/birthdayLabel"
+                    app:layout_constraintTop_toBottomOf="@id/addressLabel"/>
+
+                <TextView
+                    android:id="@+id/sexLabel"
+                    style="@style/label"
+                    android:layout_width="wrap_content"
+                    android:text="@string/id_sex"
+                    app:layout_constraintEnd_toEndOf="@id/idNoLabel"
+                    app:layout_constraintTop_toBottomOf="@id/birthdayLabel"/>
+
+                <TextView
+                    android:id="@+id/sexView"
+                    style="@style/textview"
+                    android:layout_width="0dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/sexLabel"
+                    app:layout_constraintTop_toBottomOf="@id/birthdayView"/>
+            </android.support.constraint.ConstraintLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/queryButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/query"
+            android:textColor="@color/textColorTitle"
+            android:textSize="18sp"
+            app:backgroundTint="@color/colorAccent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardView"/>
+    </android.support.constraint.ConstraintLayout>
+</android.support.design.widget.CoordinatorLayout>

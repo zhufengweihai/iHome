@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">lottery</string>
+    <string name="term">Term %d</string>
+</resources>

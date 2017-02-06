@@ -1,0 +1,5 @@
+<resources>
+    <string name="fast_share">快速分享</string>
+    <string name="history">历史</string>
+    <string name="tip_connecting">正在等待发送者连接...</string>
+</resources>

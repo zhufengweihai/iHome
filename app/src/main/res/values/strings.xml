@@ -1,0 +1,86 @@
+<resources>
+    <string name="app_name">iHome</string>
+    <string name="options">Options</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="default_name">Sign In</string>
+    <string name="my_collection">Ny Collection</string>
+    <string name="offline_download">Offline Downloads</string>
+
+    <string name="nav_home">Home</string>
+    <string name="nav_common">Common Tool</string>
+    <string name="nav_entertainment">Entertainment</string>
+    <string name="nav_study">Study</string>
+    <string name="nav_other">Other</string>
+
+    <string name="nav_lottery">Lottery Inquiry</string>
+    <string name="nav_violation">Traffic Violation</string>
+    <string name="nav_weather">Weather Report</string>
+    <string name="nav_identity">Identity information</string>
+    <string name="nav_measurement">Measurement Conversion</string>
+    <string name="nav_translation">Online Translation</string>
+    <string name="nav_women_rhythm">Women Rhythm</string>
+    <string name="nav_tv_show">TV Show</string>
+    <string name="nav_recipes">Homemade recipes</string>
+    <string name="nav_calendar">Calendar</string>
+    <string name="nav_ip">IP Address</string>
+    <string name="nav_number_attribution">Number Attribution</string>
+    <string name="nav_corporate_info">Corporate Information</string>
+    <string name="nav_named">Free Named</string>
+    <string name="nav_joke">Daily Joke</string>
+    <string name="nav_conversion">Simplified Conversion</string>
+    <string name="nav_avatars">Head Portrait</string>
+    <string name="nav_wallpapers">Wallpapers</string>
+    <string name="nav_exchange_rate">Exchange Rate</string>
+    <string name="nav_car_calculator">Buy Car Calculator</string>
+    <string name="nav_mortgage_calculator">Mortgage Calculator</string>
+    <string name="nav_rmb_rates">RMB Rates</string>
+    <string name="nav_housing_fund">Housing Fund Calculator</string>
+    <string name="nav_gold_prices">Gold Prices</string>
+    <string name="nav_dictionary">English Dictionary</string>
+    <string name="nav_periodic_table">Periodic Table</string>
+    <string name="nav_idiom">Idiom Dictionary</string>
+    <string name="nav_ip_search">IP Search</string>
+    <string name="nav_domain_search">Domain Search</string>
+
+    <array name="dummy_items">
+        <item>One</item>
+        <item>Two</item>
+        <item>Three</item>
+        <item>Four</item>
+        <item>Five</item>
+        <item>Six</item>
+        <item>Seven</item>
+        <item>Eight</item>
+        <item>Nine</item>
+        <item>Ten</item>
+    </array>
+
+    <string name="weather">My Weather</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
+    <string name="title_activity_lottery">LotteryActivity</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_identity_inquire">IdentityInquireActivity</string>
+
+    <string name="id_no">ID Number:</string>
+    <string name="id_address">Address:</string>
+    <string name="id_birthday">Birthday:</string>
+    <string name="id_sex">Sex:</string>
+    <string name="id_no_18">18 ID number:</string>
+    <string name="query">Query</string>
+</resources>

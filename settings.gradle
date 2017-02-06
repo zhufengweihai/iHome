@@ -1,0 +1,1 @@
+include ':app', ':traffic_violation', ':common', ':weather_forecast', ':measurement', ':translation', ':fastshare', ':lottery'

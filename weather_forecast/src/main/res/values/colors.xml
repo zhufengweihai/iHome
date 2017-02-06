@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorAbove">#197DB9</color>
+    <color name="colorAqi">#52AC52</color>
+    
+    <color name="cloudyStart">#FF479EC7</color>
+    <color name="cloudyEnd">#FF207EB4</color>
+    <color name="cloudyNightStart">#FF2D4C77</color>
+    <color name="cloudyNightEnd">#FF223761</color>
+    
+    <color name="dustStormStart">#FF977855</color>
+    <color name="dustStormEnd">#FF6E5239</color>
+    <color name="dustStormNightStart">#FF473F36</color>
+    <color name="dustStormNightEnd">#FF2D1D0D</color>
+
+    <color name="fogStart">#FF648095</color>
+    <color name="fogEnd">#FF2C4B64</color>
+    <color name="fogNightStart">#FF243245</color>
+    <color name="fogNightEnd">#FF09152A</color>
+
+    <color name="hazeStart">#FF9C9D8B</color>
+    <color name="hazeEnd">#FF634D1E</color>
+    <color name="hazeNightStart">#FF3A3A2D</color>
+    <color name="hazeNightEnd">#FF1B180F</color>
+
+    <color name="heavyRainStart">#FF444A63</color>
+    <color name="heavyRainEnd">#FF2F364D</color>
+    <color name="heavyRainNightStart">#FF2C324B</color>
+    <color name="heavyRainNightEnd">#FF121A3A</color>
+
+    <color name="lightRainStart">#FF7796AC</color>
+    <color name="lightRainEnd">#FF4E6B89</color>
+    <color name="lightRainNightStart">#FF334761</color>
+    <color name="lightRainNightEnd">#FF1E2B3F</color>
+
+    <color name="overcastStart">#FF7C97AC</color>
+    <color name="overcastEnd">#FF658DAA</color>
+    <color name="overcastNightStart">#FF55687A</color>
+    <color name="overcastNightEnd">#FF324058</color>
+
+    <color name="showerStart">#FF6A97AF</color>
+    <color name="showerEnd">#FF3B698A</color>
+    <color name="showerNightStart">#FF375E7A</color>
+    <color name="showerNightEnd">#FF174662</color>
+
+    <color name="snowStart">#FF72A1C8</color>
+    <color name="snowEnd">#FF4A79AD</color>
+    <color name="snowNightStart">#FF435B6F</color>
+    <color name="snowNightEnd">#FF2B4559</color>
+
+    <color name="starStart">#FF034F8F</color>
+    <color name="starEnd">#FF092468</color>
+    <color name="sunStart">#FF14BDED</color>
+    <color name="sunEnd">#FF1875BA</color>
+</resources>

@@ -1,0 +1,167 @@
+<resources>
+    <string name="title">Measurement Conversion</string>
+    <string-array name="measurement">
+        <item>Length</item>
+        <item>Area</item>
+        <item>Volume</item>
+        <item>Mass</item>
+        <item>Temp</item>
+        <item>Pressure</item>
+        <item>Power</item>
+        <item>Energy</item>
+        <item>Density</item>
+        <item>Force</item>
+        <item>Time</item>
+        <item>Speed</item>
+        <item>Data</item>
+        <item>Angle</item>
+    </string-array>
+
+    <string-array name="length_metric">
+        <item>ly</item>
+        <item>au</item>
+        <item>km</item>
+        <item>m</item>
+        <item>dm</item>
+        <item>cm</item>
+        <item>mm</item>
+        <item>um</item>
+        <item>nm</item>
+        <item>pm</item>
+    </string-array>
+    <string-array name="length_british">
+        <item>nmi</item>
+        <item>mi</item>
+        <item>fur</item>
+        <item>chn</item>
+        <item>rod</item>
+        <item>fm</item>
+        <item>yd</item>
+        <item>ft</item>
+        <item>hand</item>
+        <item>in</item>
+    </string-array>
+    <string-array name="length_chinese">
+        <item>li</item>
+        <item>zh</item>
+        <item>chi</item>
+        <item>cun</item>
+        <item>fen</item>
+        <item>li</item>
+        <item>hao</item>
+    </string-array>
+    <string-array name="note_length_metric">
+        <item>Lightyear</item>
+        <item>AU</item>
+        <item>Kilometer</item>
+        <item>Meter</item>
+        <item>Decimeter</item>
+        <item>Centimeter</item>
+        <item>Millimeter</item>
+        <item>Micrometer</item>
+        <item>Nanometer</item>
+        <item>Picometer</item>
+    </string-array>
+    <string-array name="note_length_british">
+        <item>NMI</item>
+        <item>Mile</item>
+        <item>Furlong</item>
+        <item>Chain</item>
+        <item>Rod</item>
+        <item>Fathom</item>
+        <item>Yards</item>
+        <item>Foot</item>
+        <item>Hand</item>
+        <item>Inch</item>
+    </string-array>
+    <string-array name="note_length_chinese">
+        <item>Lǐ</item>
+        <item>Zhang</item>
+        <item>Chi</item>
+        <item>Cun</item>
+        <item>Fen</item>
+        <item>Lí</item>
+        <item>Hao</item>
+    </string-array>
+
+    <string-array name="note_area_metric">
+        <item>SqKilometer</item>
+        <item>Hectare</item>
+        <item>Acre</item>
+        <item>SqMeter</item>
+        <item>SqDecimeter</item>
+        <item>SqCentimeter</item>
+        <item>SqMillimeter</item>
+    </string-array>
+    <string-array name="note_area_british">
+        <item>SqMile</item>
+        <item>Acre</item>
+        <item>SqChain</item>
+        <item>SqRod</item>
+        <item>SqYard</item>
+        <item>SqFoot</item>
+        <item>SqInch</item>
+    </string-array>
+    <string-array name="note_area_chinese">
+        <item>Qing</item>
+        <item>Mu</item>
+        <item>Fen</item>
+        <item>Li</item>
+    </string-array>
+
+    <string-array name="note_volume_metric">
+        <item>CubeKiloMeter</item>
+        <item>CubeMeter</item>
+        <item>CubeDecimeter</item>
+        <item>CubeCentimeter</item>
+        <item>CubeMillimeter</item>
+    </string-array>
+    <string-array name="note_volume_british">
+        <item>AcreFoot</item>
+        <item>CubeYard</item>
+        <item>CubeFoot</item>
+        <item>CubeInch</item>
+        <item>UK bbl</item>
+        <item>UK gal</item>
+        <item>UK pt</item>
+        <item>US bbl</item>
+        <item>US gal</item>
+        <item>US pt</item>
+    </string-array>
+    <string-array name="note_volume_chinese">
+        <item>HundredLiters</item>
+        <item>TenLiters</item>
+        <item>Liter</item>
+        <item>Deciliter</item>
+        <item>Centiliter</item>
+        <item>Milliliter</item>
+    </string-array>
+
+    <string-array name="note_mass_metric">
+        <item>Ton</item>
+        <item>Quintal</item>
+        <item>Kilogram</item>
+        <item>Gram</item>
+        <item>Carat</item>
+        <item>Milligram</item>
+        <item>Microgram</item>
+    </string-array>
+    <string-array name="note_mass_british">
+        <item>LongTon</item>
+        <item>ShortTon</item>
+        <item>UK Cwt</item>
+        <item>US Cwt</item>
+        <item>Stone</item>
+        <item>Pound</item>
+        <item>Ounce</item>
+        <item>Dram</item>
+        <item>Grain</item>
+    </string-array>
+    <string-array name="note_mass_chinese">
+        <item>Dan</item>
+        <item>Jin</item>
+        <item>Liang</item>
+        <item>Qian</item>
+        <item>Fen</item>
+    </string-array>
+</resources>

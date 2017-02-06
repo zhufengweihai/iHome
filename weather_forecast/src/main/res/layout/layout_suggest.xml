@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                      xmlns:app="http://schemas.android.com/apk/res-auto"
+                                      android:id="@+id/suggestLayout"
+                                      android:layout_width="match_parent"
+                                      android:layout_height="wrap_content"
+                                      android:layout_marginTop="10dp"
+                                      android:background="@color/colorForeground"
+                                      android:paddingBottom="20dp"
+                                      android:paddingTop="10dp"
+                                      app:columnCount="4"
+                                      app:rowCount="2">
+
+    <LinearLayout
+        android:clickable="true"
+        android:orientation="vertical"
+        app:layout_column="0"
+        app:layout_columnWeight="1"
+        app:layout_row="0">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:drawableTop="@mipmap/ic_suggest_comfort_index"
+            android:text="@string/index_comfort"/>
+
+        <TextView
+            android:id="@+id/comfortView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="较适宜"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        app:layout_column="1"
+        app:layout_columnWeight="1"
+        app:layout_row="0">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:drawableTop="@mipmap/ic_suggest_dress_index"
+            android:text="@string/index_dress"/>
+
+        <TextView
+            android:id="@+id/dressView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="炎热"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        app:layout_column="2"
+        app:layout_columnWeight="1"
+        app:layout_row="0">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:drawableTop="@mipmap/ic_suggest_cold_index"
+            android:text="@string/index_cold"/>
+
+        <TextView
+            android:id="@+id/coldView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="少发"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        app:layout_column="3"
+        app:layout_columnWeight="1"
+        app:layout_row="0">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:drawableTop="@mipmap/ic_suggest_ultraviolet_index"
+            android:text="@string/index_ultraviolet"/>
+
+        <TextView
+            android:id="@+id/ultravioletView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="适宜"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        app:layout_column="0"
+        app:layout_columnWeight="1"
+        app:layout_row="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:drawableTop="@mipmap/ic_suggest_car_wash_index"
+            android:text="@string/index_car_wash"/>
+
+        <TextView
+            android:id="@+id/carWashView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="一般"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        app:layout_column="1"
+        app:layout_columnWeight="1"
+        app:layout_row="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:drawableTop="@mipmap/ic_suggest_sport_index"
+            android:text="@string/index_sport"/>
+
+        <TextView
+            android:id="@+id/sportView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="中等"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        app:layout_column="2"
+        app:layout_columnWeight="1"
+        app:layout_row="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:drawableTop="@mipmap/ic_suggest_date_index"
+            android:text="@string/index_date"/>
+
+        <TextView
+            android:id="@+id/dateView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="不宜"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        app:layout_column="3"
+        app:layout_columnWeight="1"
+        app:layout_row="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:drawableTop="@mipmap/ic_suggest_sunscreen_index"
+            android:text="@string/index_umbrella"/>
+
+        <TextView
+            android:id="@+id/umbrellaView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="较不宜"/>
+    </LinearLayout>
+</android.support.v7.widget.GridLayout>

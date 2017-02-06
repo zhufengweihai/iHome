@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--<color name="colorPrimary">#9AAEB8</color>
+    <color name="colorPrimaryDark">#8390A0</color>
+    <color name="colorPrimary">#4F97EA</color>-->
+    <color name="colorPrimary">#4F97EA</color>
+    <color name="colorPrimaryDark">#477AE5</color>
+    <color name="colorAccent">#57C660</color>
+    <!--color name="colorCardTile">#FBE9D9</color-->
+    <!--color name="colorCardTile">#3DCE3D</color-->
+    <color name="colorItemTile">#D9E9FB</color>
+    <color name="colorBackground">#E7E7E7</color>
+    <color name="colorForeground">#FAFAFA</color>
+    <color name="colorChooser">#BF49FF</color>
+    <color name="colorHead">#E7E7E7</color>
+    <color name="colorSelected">#F0F0F0</color>
+
+    <color name="background_tab_pressed">#6633B5E5</color>
+    <color name="colorAlarm">#E6A541</color>
+    <color name="textColorTitle">@android:color/white</color>
+    <color name="textColor">#ff969696</color>
+    <color name="textColorDark">#ff555555</color>
+    
+    <color name="rippelColor">#0099CC</color>
+</resources>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                      xmlns:app="http://schemas.android.com/apk/res-auto"
+                                      android:layout_width="match_parent"
+                                      android:layout_height="wrap_content"
+                                      android:layout_gravity="bottom"
+                                      android:background="@drawable/background_for_default"
+                                      app:columnCount="2"
+                                      app:rowCount="3">
+
+    <TextView
+        android:id="@+id/tempView"
+        android:layout_width="match_parent"
+        android:includeFontPadding="false"
+        android:lineSpacingMultiplier="0"
+        android:text="26℃"
+        android:textColor="@android:color/white"
+        android:textSize="60sp"
+        app:layout_column="0"
+        app:layout_row="0"/>
+
+    <TextView
+        android:id="@+id/pm25View"
+        android:drawableLeft="@mipmap/aqi_leaf"
+        android:drawablePadding="5dp"
+        android:text="127 轻度污染"
+        android:textColor="@android:color/white"
+        android:textSize="13sp"
+        app:layout_column="0"
+        app:layout_row="1"/>
+
+    <TextView
+        android:id="@+id/alarmView"
+        android:background="@drawable/background_alarm"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:padding="5dp"
+        android:text="雷电预警"
+        android:textColor="@color/colorAlarm"
+        android:textSize="13sp"
+        app:layout_column="0"
+        app:layout_row="2"/>
+
+    <TextView
+        android:id="@+id/weatherView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="多云"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        app:layout_column="1"
+        app:layout_gravity="center_horizontal|top"
+        app:layout_row="0"/>
+
+    <ImageView
+        android:id="@+id/weatherImgView"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:scaleType="fitXY"
+        android:src="@mipmap/weather_sun"
+        app:layout_column="1"
+        app:layout_row="1"
+        app:layout_rowSpan="2"
+        app:layout_rowWeight="1"/>
+</android.support.v7.widget.GridLayout>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item>
+        <bitmap
+            android:src="@mipmap/ic_weather_above_thundershower"
+            android:tint="@color/colorPrimaryDark"/>
+    </item>
+    <item>
+        <bitmap android:src="@mipmap/ic_weather_below_thundershower"/>
+    </item>
+</layer-list>

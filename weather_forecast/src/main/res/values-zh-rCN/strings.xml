@@ -1,0 +1,30 @@
+<resources>
+    <string name="alarm">预警</string>
+    <string name="day_yesterday">昨天</string>
+    <string name="day_today">今天</string>
+    <string name="day_tomorrow">明天</string>
+    <string-array name="weeks">
+        <item>周日</item>
+        <item>周一</item>
+        <item>周二</item>
+        <item>周三</item>
+        <item>周四</item>
+        <item>周五</item>
+        <item>周六</item>
+    </string-array>
+    <string name="air_quality">空气质量</string>
+    <string name="wind_direction">风向</string>
+    <string name="wind_power">风力</string>
+    <string name="sunrise">日出</string>
+    <string name="sunset">日落</string>
+    <string name="humidity">湿度</string>
+    <string name="apparent_temperature">体感温度</string>
+    <string name="index_comfort">舒适指数</string>
+    <string name="index_car_wash">洗车指数</string>
+    <string name="index_cold">感冒指数</string>
+    <string name="index_date">约会指数</string>
+    <string name="index_dress">穿衣指数</string>
+    <string name="index_sport">运动指数</string>
+    <string name="index_ultraviolet">紫外线指数</string>
+    <string name="index_umbrella">雨伞指数</string>
+</resources>

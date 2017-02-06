@@ -1,0 +1,5 @@
+<resources>
+    <string name="fast_share">Fast Share</string>
+    <string name="history">Hitory</string>
+    <string name="tip_connecting">Waiting for the sender to connect...</string>
+</resources>

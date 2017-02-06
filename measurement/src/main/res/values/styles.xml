@@ -1,0 +1,45 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="horizontalDivider">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">1px</item>
+        <item name="android:background">@color/colorBackground</item>
+        <item name="layout_constraintEnd_toEndOf">parent</item>
+        <item name="layout_constraintStart_toStartOf">parent</item>
+    </style>
+
+    <style name="verticalDivider">
+        <item name="android:layout_width">1px</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:background">@color/colorBackground</item>
+        <item name="layout_constraintBottom_toTopOf">@id/horizontalGuide6</item>
+        <item name="layout_constraintTop_toBottomOf">@id/horizontalGuide3</item>
+    </style>
+
+    <style name="verticalGuide">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="horizontalGuide">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="numberButton">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:background">@drawable/background_number</item>
+        <item name="android:textSize">25sp</item>
+    </style>
+
+    <style name="unitEdit">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:numeric">decimal</item>
+    </style>
+</resources>
