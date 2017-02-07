@@ -1,6 +1,8 @@
 package com.zf.common;
 
 import com.yolanda.nohttp.NoHttp;
+import com.yolanda.nohttp.rest.OnResponseListener;
+import com.yolanda.nohttp.rest.Request;
 import com.yolanda.nohttp.rest.RequestQueue;
 
 /**
@@ -25,7 +27,11 @@ public class NoHttpUtils {
         return noHttpUtils;
     }
 
-    public RequestQueue getRequestQueue() {
+    public <T> void addRequest(int what, Request<T> request, OnResponseListener<T> responseListener) {
+        requestQueue.add(what, request, responseListener);
+    }
+
+    public RequestQueue requestQueue() {
         return requestQueue;
     }
 

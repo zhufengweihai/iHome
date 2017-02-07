@@ -24,7 +24,7 @@ public class TranslateService {
     @NonNull
     private SimpleResponseListener<String> createTkkResponseListener() {
         //        Request request = NoHttp.createStringRequest("https://translate.google.cn/m/translate");
-//        RequestQueue requestQueue = NoHttpUtils.instance().getRequestQueue();
+//        RequestQueue requestQueue = NoHttpUtils.instance().requestQueue();
 //        requestQueue.add(NoHttpUtils.getWhat(), request, createTkkResponseListener());
         return new SimpleResponseListener<String>() {
             @Override
@@ -37,12 +37,6 @@ public class TranslateService {
                 String result = c + '.' + (Long.parseLong(a) + Long.parseLong(b));
                 //translate(result);
             }
-
-            @Override
-            public void onFailed(int what, String url, Object tag, Exception exception, int responseCode, long
-                    networkMillis) {
-
-            }
         };
     }
 
@@ -53,18 +47,12 @@ public class TranslateService {
                 "&tsel=0&kc=1&tk=" + tk + "&q=" + sourceText;
 
         Request request = NoHttp.createStringRequest(url);
-        RequestQueue requestQueue = NoHttpUtils.instance().getRequestQueue();
+        RequestQueue requestQueue = NoHttpUtils.instance().requestQueue();
         requestQueue.add(NoHttpUtils.getWhat(), request, new SimpleResponseListener<String>() {
             @Override
             public void onSucceed(int what, Response<String> response) {
                 String result = response.get();
                 listener.onResult(result);
-            }
-
-            @Override
-            public void onFailed(int what, String url, Object tag, Exception exception, int responseCode, long
-                    networkMillis) {
-                Log.e("TranslateActivity", exception.getLocalizedMessage());
             }
         });
     }

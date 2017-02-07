@@ -31,7 +31,7 @@ public class LotteryInfoRequest {
 
     public void request(Lottery lottery, LotteryInfoResolveListener listener) {
         Request request = NoHttp.createJsonObjectRequest(URL_HEAD + lottery.getCode() + URL_TAIL);
-        RequestQueue requestQueue = NoHttpUtils.instance().getRequestQueue();
+        RequestQueue requestQueue = NoHttpUtils.instance().requestQueue();
         requestQueue.add(NoHttpUtils.getWhat(), request, createResponseListener(lottery, listener));
     }
 
@@ -58,11 +58,6 @@ public class LotteryInfoRequest {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-            }
-
-            @Override
-            public void onFailed(int what, String url, Object tag, Exception e, int responseCode, long networkMillis) {
-                e.printStackTrace();
             }
         };
     }

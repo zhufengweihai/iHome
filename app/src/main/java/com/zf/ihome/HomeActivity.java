@@ -13,11 +13,11 @@ import android.view.View;
 
 import com.deahu.activity.TrafficViolationActivity;
 import com.zf.common.app.BaseActivity;
+import com.zf.common.widget.dragdrop.DragdropView;
 import com.zf.fastshare.FastShareActivity;
 import com.zf.ihome.id.IdentityQueryActivity;
-import com.zf.lottery.LotteryActivity;
+import com.zf.lottery.LotteriesActivity;
 import com.zf.measurement.MeasurementActivity;
-import com.zf.common.widget.dragdrop.DragdropView;
 import com.zf.translation.TranslateActivity;
 import com.zf.weather.WeatherForecastActivity;
 
@@ -114,7 +114,7 @@ public class HomeActivity extends BaseActivity implements NavigationView.OnNavig
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         if (id == R.id.nav_lottery) {
-            startActivity(new Intent(this, LotteryActivity.class));
+            startActivity(new Intent(this, LotteriesActivity.class));
         } else if (id == R.id.nav_violation) {
             startActivity(new Intent(this, TrafficViolationActivity.class));
         } else if (id == R.id.nav_weather) {

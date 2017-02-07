@@ -8,13 +8,17 @@ import android.view.MenuItem;
 
 import com.zf.common.app.BaseActivity;
 import com.zf.common.widget.PagerSlidingTabStrip;
+import com.zf.lottery.dao.LotteryClassDao;
+import com.zf.lottery.dao.LotteryClassListener;
+import com.zf.lottery.dao.impl.LotteryClassDaoImpl;
+import com.zf.lottery.data.LotteryClass;
 import com.zf.lottery.parse.LotteryGroup;
 import com.zf.lottery.parse.LotteryJsRequest;
 import com.zf.lottery.parse.LotteryResolveListener;
 
 import java.util.List;
 
-public class LotteriesActivity extends BaseActivity implements LotteryResolveListener {
+public class LotteriesActivity extends BaseActivity implements LotteryClassListener {
     private LotteryFragment.LotteryPagerAdapter pagerAdapter;
     private ViewPager viewPager;
 
@@ -28,8 +32,8 @@ public class LotteriesActivity extends BaseActivity implements LotteryResolveLis
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        LotteryJsRequest parser = new LotteryJsRequest();
-        parser.request(this);
+        LotteryClassDao lotteryClassDao = new LotteryClassDaoImpl();
+        lotteryClassDao.requestLotteryClass(this);
     }
 
 
@@ -49,12 +53,8 @@ public class LotteriesActivity extends BaseActivity implements LotteryResolveLis
         return super.onOptionsItemSelected(item);
     }
 
-
     @Override
-    public void onResolved(List<LotteryGroup> groups) {
-        pagerAdapter = new LotteryFragment.LotteryPagerAdapter(getSupportFragmentManager(), groups);
-        viewPager.setAdapter(pagerAdapter);
-        PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) findViewById(R.id.pagertab);
-        tabs.setViewPager(viewPager);
+    public void onRequest(List<LotteryClass> classes) {
+
     }
 }

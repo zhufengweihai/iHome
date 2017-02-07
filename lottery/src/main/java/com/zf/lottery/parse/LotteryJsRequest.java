@@ -32,7 +32,7 @@ public class LotteryJsRequest {
 
     public void request(LotteryResolveListener listener) {
         Request request = NoHttp.createStringRequest(URL);
-        NoHttpUtils.instance().getRequestQueue().add(NoHttpUtils.getWhat(), request, createResponseListener(listener));
+        NoHttpUtils.instance().requestQueue().add(NoHttpUtils.getWhat(), request, createResponseListener(listener));
     }
 
     @NonNull
@@ -53,12 +53,6 @@ public class LotteryJsRequest {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-            }
-
-            @Override
-            public void onFailed(int what, String url, Object tag, Exception exception, int responseCode, long
-                    networkMillis) {
-
             }
         };
     }

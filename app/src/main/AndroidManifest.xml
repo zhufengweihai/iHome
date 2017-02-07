@@ -34,10 +34,6 @@
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"/>
         <activity
-            android:name=".lottery.LotteryActivity"
-            android:label="@string/title_activity_lottery"
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <activity
             android:name=".id.IdentityQueryActivity"
             android:label="@string/title_activity_identity_inquire"
             android:theme="@style/AppTheme.NoActionBar"/>

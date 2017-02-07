@@ -33,7 +33,7 @@ public class WeatherRequest {
 
     public void request(String city, WeatherRequestListener listener) {
         Request request = NoHttp.createStringRequest(URL + city);
-        RequestQueue requestQueue = NoHttpUtils.instance().getRequestQueue();
+        RequestQueue requestQueue = NoHttpUtils.instance().requestQueue();
         requestQueue.add(NoHttpUtils.getWhat(), request, createResponseListener(listener));
     }
 
@@ -101,11 +101,6 @@ public class WeatherRequest {
                 } catch (XmlPullParserException | IOException e) {
                     e.printStackTrace();
                 }
-            }
-
-            @Override
-            public void onFailed(int what, String url, Object tag, Exception exception, int responseCode, long
-                    networkMillis) {
             }
         };
     }

@@ -21,7 +21,7 @@ public class IdentityQuery {
     public void request(String idNo,IdentityQueryListener listener) {
         Request<JSONObject> request = NoHttp.createJsonObjectRequest(httpUrl + idNo);
         request.addHeader("apikey", "4bb8e732d276dfa510fa7388ecefa7a0");
-        NoHttpUtils.instance().getRequestQueue().add(NoHttpUtils.getWhat(), request, createIdResponseListener(listener));
+        NoHttpUtils.instance().requestQueue().add(NoHttpUtils.getWhat(), request, createIdResponseListener(listener));
     }
 
     @NonNull
@@ -43,11 +43,6 @@ public class IdentityQuery {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-            }
-
-            @Override
-            public void onFailed(int what, String url, Object tag, Exception exception, int responseCode, long networkMillis) {
-
             }
         };
     }
