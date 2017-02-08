@@ -6,4 +6,5 @@ package com.zf.lottery.dao;
 
 public interface LotteryClassDao {
     void requestLotteryClass(LotteryClassListener listener);
+    void requestLotteryResults(LotteryResultsListener listener);
 }
