@@ -3,6 +3,7 @@ package com.zf.lottery;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -10,15 +11,19 @@ import com.zf.common.app.BaseActivity;
 import com.zf.common.widget.PagerSlidingTabStrip;
 import com.zf.lottery.dao.LotteryClassDao;
 import com.zf.lottery.dao.LotteryClassListener;
+import com.zf.lottery.dao.LotteryResultsListener;
 import com.zf.lottery.dao.impl.LotteryClassDaoImpl;
+import com.zf.lottery.data.Lottery;
 import com.zf.lottery.data.LotteryClass;
 import com.zf.lottery.parse.LotteryGroup;
 import com.zf.lottery.parse.LotteryJsRequest;
 import com.zf.lottery.parse.LotteryResolveListener;
+import com.zf.lottery.service.LotteryService;
+import com.zf.lottery.service.impl.LotteryServiceImpl;
 
 import java.util.List;
 
-public class LotteriesActivity extends BaseActivity implements LotteryClassListener {
+public class LotteriesActivity extends BaseActivity implements LotteryResultsListener {
     private LotteryFragment.LotteryPagerAdapter pagerAdapter;
     private ViewPager viewPager;
 
@@ -33,7 +38,7 @@ public class LotteriesActivity extends BaseActivity implements LotteryClassListe
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         LotteryClassDao lotteryClassDao = new LotteryClassDaoImpl();
-        lotteryClassDao.requestLotteryClass(this);
+        lotteryClassDao.requestLotteryResults(this);
     }
 
 
@@ -54,7 +59,9 @@ public class LotteriesActivity extends BaseActivity implements LotteryClassListe
     }
 
     @Override
-    public void onRequest(List<LotteryClass> classes) {
-
+    public void onRequest(List<Lottery> lotteries) {
+        LotteryService lotteryService = new LotteryServiceImpl();
+        List<Pair<String, Integer>> occurList = lotteryService.sortNumberOccurrences(lotteries);
+        System.out.print(occurList);
     }
 }

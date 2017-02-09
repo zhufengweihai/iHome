@@ -26,8 +26,8 @@ import java.util.List;
 
 public class LotteryClassDaoImpl implements LotteryClassDao {
     private static final String URL = "https://route.showapi.com/44-6?showapi_appid=31607&showapi_sign=a5858af94b274596b7e175634a2ed269";
-    private static final String URL_RESULT = "https://route.showapi.com/44-2?showapi_appid=31607&showapi_sign=a5858af94b274596b7e175634a2ed269" +
-            "&code=cqssc&endTime=%s";
+    private static final String URL_RESULT = "https://route.showapi.com/44-2?code=cqssc&count=10&endTime=2016-08-09 21:21:40&showapi_appid=31607" +
+            "&showapi_timestamp=20170209223727&showapi_sign=dbdc2936ad00ade1884f01c6492a637a";
 
     @Override
     public void requestLotteryClass(final LotteryClassListener listener) {
@@ -61,7 +61,7 @@ public class LotteryClassDaoImpl implements LotteryClassDao {
     @Override
     public void requestLotteryResults(final LotteryResultsListener listener) {
         String url = String.format(URL_RESULT, new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()));
-        final Request request = NoHttp.createJsonObjectRequest(url);
+        Request request = NoHttp.createJsonObjectRequest(url);
         NoHttpUtils.instance().addRequest(0, request, new SimpleResponseListener<JSONObject>() {
 
             @Override
@@ -82,6 +82,11 @@ public class LotteryClassDaoImpl implements LotteryClassDao {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+            }
+
+            @Override
+            public void onFailed(int what, Response<JSONObject> response) {
+                super.onFailed(what, response);
             }
         });
     }

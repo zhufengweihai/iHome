@@ -1,5 +1,7 @@
 package com.zf.lottery.service;
 
+import android.util.Pair;
+
 import com.zf.lottery.data.Lottery;
 
 import java.util.List;
@@ -9,5 +11,5 @@ import java.util.List;
  */
 
 public interface LotteryService {
-    List<String> sortNumberOccurrences(List<Lottery> lotteries);
+    List<Pair<String, Integer>> sortNumberOccurrences(List<Lottery> lotteries);
 }
