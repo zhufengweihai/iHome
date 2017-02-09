@@ -9,5 +9,5 @@ import java.util.List;
  */
 
 public interface LotteryService {
-    List<String> sortNumberSccurrences(List<Lottery> lotteries);
+    List<String> sortNumberOccurrences(List<Lottery> lotteries);
 }

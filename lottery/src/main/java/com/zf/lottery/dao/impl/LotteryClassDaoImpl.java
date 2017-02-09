@@ -75,7 +75,7 @@ public class LotteryClassDaoImpl implements LotteryClassDao {
                         Lottery lottery = new Lottery();
                         lottery.setTerm(result.getString("expect"));
                         lottery.setTime(result.getString("time"));
-                        lottery.setNumbers(result.getString("openCode"));
+                        lottery.setNumbers(result.getString("openCode").split(","));
                         lotteries.add(lottery);
                     }
                     listener.onRequest(lotteries);

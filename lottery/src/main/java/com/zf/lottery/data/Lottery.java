@@ -6,7 +6,7 @@ package com.zf.lottery.data;
 
 public class Lottery {
     private String term = null;
-    private String numbers = null;
+    private String[] numbers = null;
     private String time = null;
 
     public String getTerm() {
@@ -17,11 +17,11 @@ public class Lottery {
         this.term = term;
     }
 
-    public String getNumbers() {
+    public String[] getNumbers() {
         return numbers;
     }
 
-    public void setNumbers(String numbers) {
+    public void setNumbers(String[] numbers) {
         this.numbers = numbers;
     }
 
