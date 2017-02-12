@@ -25,10 +25,8 @@ import java.util.List;
  */
 
 public class LotteryClassDaoImpl implements LotteryClassDao {
-    private static final String URL = "https://route.showapi" + "" + "" + "" +
-            ".com/44-6?showapi_appid=31607&showapi_sign=a5858af94b274596b7e175634a2ed269";
-    private static final String URL_RESULT = "https://route.showapi" + "" + "" + "" +
-            ".com/44-2?code=cqssc&count=50&endTime=%s&showapi_appid=31607" +
+    private static final String URL = "https://route.showapi.com/44-6?showapi_appid=31607&showapi_sign=a5858af94b274596b7e175634a2ed269";
+    private static final String URL_RESULT = "https://route.showapi.com/44-2?code=cqssc&count=50&endTime=%s&showapi_appid=31607" +
             "&showapi_sign=a5858af94b274596b7e175634a2ed269";
 
     @Override
@@ -62,42 +60,46 @@ public class LotteryClassDaoImpl implements LotteryClassDao {
 
     @Override
     public void requestLotteryResults(final LotteryResultsListener listener) {
-        Date now = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        final List<Lottery> lotteries = new ArrayList<Lottery>();
-        for (int i = 0; i < 10; i++) {
-            Date afterDate = new Date(now.getTime() + i * 10 * 50 * 60 * 1000);
-            String url = String.format(URL_RESULT, dateFormat.format(afterDate));
-            Request request = NoHttp.createJsonObjectRequest(url);
-            NoHttpUtils.instance().addRequest(0, request, new SimpleResponseListener<JSONObject>() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd%20HH:mm:ss");
+        List<Lottery> lotteries = new ArrayList<>();
+        String url = String.format(URL_RESULT, dateFormat.format(new Date()));
+        requestLotteryResult(listener, lotteries, url);
+    }
 
-                @Override
-                public void onSucceed(int what, Response<JSONObject> response) {
-                    try {
-                        JSONObject jsonObject = response.get();
-                        JSONArray resultJsonArray = jsonObject.getJSONObject("showapi_res_body").getJSONArray("result");
-                        int length = resultJsonArray.length();
+    private void requestLotteryResult(final LotteryResultsListener listener, final List<Lottery> lotteries, String url) {
+        Request request = NoHttp.createJsonObjectRequest(url);
+        NoHttpUtils.instance().addRequest(0, request, new SimpleResponseListener<JSONObject>() {
 
-                        for (int i = 0; i < length; i++) {
-                            JSONObject result = resultJsonArray.getJSONObject(i);
-                            Lottery lottery = new Lottery();
-                            lottery.setTerm(result.getString("expect"));
-                            lottery.setTime(result.getString("time"));
-                            lottery.setNumbers(result.getString("openCode").split(","));
-                            lotteries.add(lottery);
-                        }
-                        listener.onRequest(lotteries);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+            @Override
+            public void onSucceed(int what, Response<JSONObject> response) {
+                try {
+                    JSONObject jsonObject = response.get();
+                    JSONArray resultJsonArray = jsonObject.getJSONObject("showapi_res_body").getJSONArray("result");
+                    int length = resultJsonArray.length();
+
+                    for (int i = 0; i < length; i++) {
+                        JSONObject result = resultJsonArray.getJSONObject(i);
+                        Lottery lottery = new Lottery();
+                        lottery.setTerm(result.getString("expect"));
+                        lottery.setTime(result.getString("time"));
+                        lottery.setNumbers(result.getString("openCode").split(","));
+                        lotteries.add(lottery);
                     }
+                    int size = lotteries.size();
+                    if (size < 500) {
+                        String url = String.format(URL_RESULT, lotteries.get(size - 1).getTime().replace(" ", "%20"));
+                        requestLotteryResult(listener, lotteries, url);
+                    }
+                    listener.onRequest(lotteries);
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
+            }
 
-                @Override
-                public void onFailed(int what, Response<JSONObject> response) {
-                    super.onFailed(what, response);
-                }
-            });
-        }
-
+            @Override
+            public void onFailed(int what, Response<JSONObject> response) {
+                super.onFailed(what, response);
+            }
+        });
     }
 }
