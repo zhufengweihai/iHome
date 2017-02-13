@@ -16,7 +16,7 @@ import com.zf.common.app.BaseActivity;
 import com.zf.common.widget.dragdrop.DragdropView;
 import com.zf.fastshare.FastShareActivity;
 import com.zf.ihome.id.IdentityQueryActivity;
-import com.zf.lottery.LotteriesActivity;
+import com.zf.lottery.view.LotteriesActivity;
 import com.zf.measurement.MeasurementActivity;
 import com.zf.translation.TranslateActivity;
 import com.zf.weather.WeatherForecastActivity;

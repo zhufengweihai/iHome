@@ -2,8 +2,9 @@ package com.zf.lottery.view;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -34,6 +35,7 @@ public class LotteriesActivity extends BaseActivity implements LotteryResultsLis
         getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+        ((RecyclerView) findViewById(R.id.occurListView)).setLayoutManager(new LinearLayoutManager(this));
         LotteryClassDao lotteryClassDao = new LotteryClassDaoImpl();
         lotteryClassDao.requestLotteryResults(this);
     }
@@ -59,6 +61,6 @@ public class LotteriesActivity extends BaseActivity implements LotteryResultsLis
     public void onRequest(List<Lottery> lotteries) {
         LotteryService lotteryService = new LotteryServiceImpl();
         List<Pair<String, Integer>> occurList = lotteryService.sortNumberOccurrences(lotteries);
-        Log.e("LotteriesActivity", occurList.toString());
+        ((RecyclerView) findViewById(R.id.occurListView)).setAdapter(new StatListAdapter(occurList));
     }
 }
