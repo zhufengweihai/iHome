@@ -1,4 +1,4 @@
-package com.zf.lottery;
+package com.zf.lottery.view;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -9,6 +9,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.zf.common.app.BaseActivity;
+import com.zf.lottery.LotteryFragment;
+import com.zf.lottery.R;
 import com.zf.lottery.dao.LotteryClassDao;
 import com.zf.lottery.dao.LotteryResultsListener;
 import com.zf.lottery.dao.impl.LotteryClassDaoImpl;
