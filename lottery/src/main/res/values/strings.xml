@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">lottery</string>
     <string name="term">Term %d</string>
+    <string name="tow_star_number1">No.1</string>
+    <string name="tow_star_number2">No.2</string>
+    <string name="not_occur_number">Occur No.</string>
+    <string name="total_not_occur_number">Total Occur No.</string>
 </resources>
