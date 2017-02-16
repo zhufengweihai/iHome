@@ -1,30 +1,32 @@
 package com.zf.lottery.data;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * Created by Administrator on 2017/2/14 0014.
  */
 
-public class TowStarStatData {
-    private String towStart1 = null;
-    private String towStart2 = null;
+public class TowStarStatData extends StatData {
+    private String pair1 = null;
+    private String pair2 = null;
     private int notOccurCount1 = 0;
     private int notOccurCount2 = 0;
     private int totalNotOccurCount = 0;
 
-    public String getTowStart1() {
-        return towStart1;
+    public String getPair1() {
+        return pair1;
     }
 
-    public void setTowStart1(String towStart1) {
-        this.towStart1 = towStart1;
+    public void setPair1(String pair1) {
+        this.pair1 = pair1;
     }
 
-    public String getTowStart2() {
-        return towStart2;
+    public String getPair2() {
+        return pair2;
     }
 
-    public void setTowStart2(String towStart2) {
-        this.towStart2 = towStart2;
+    public void setPair2(String pair2) {
+        this.pair2 = pair2;
     }
 
     public int getNotOccurCount1() {

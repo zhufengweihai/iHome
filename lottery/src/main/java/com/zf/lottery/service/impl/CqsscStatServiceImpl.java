@@ -3,7 +3,9 @@ package com.zf.lottery.service.impl;
 import android.util.Pair;
 
 import com.zf.lottery.data.Lottery;
-import com.zf.lottery.service.LotteryService;
+import com.zf.lottery.data.StatData;
+import com.zf.lottery.data.TowStarStatData;
+import com.zf.lottery.service.LotteryStatService;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,10 +19,10 @@ import java.util.Set;
  * Created by Administrator on 2017/2/8 0008.
  */
 
-public class LotteryServiceImpl implements LotteryService {
+public class CqsscStatServiceImpl implements LotteryStatService {
     @Override
-    public List<Pair<String, Integer>> sortNumberOccurrences(List<Lottery> lotteries) {
-        Map<String, Integer> map = new HashMap<>();
+    public List<StatData> getNumberStat(List<Lottery> lotteries) {
+        Map<int[], TowStarStatData> map = new HashMap<>();
         int size = lotteries.size();
         for (int i = 0; i < size; i++) {
             String[] numbers = lotteries.get(i).getNumbers();

@@ -16,8 +16,8 @@ import com.zf.lottery.dao.LotteryClassDao;
 import com.zf.lottery.dao.LotteryResultsListener;
 import com.zf.lottery.dao.impl.LotteryClassDaoImpl;
 import com.zf.lottery.data.Lottery;
-import com.zf.lottery.service.LotteryService;
-import com.zf.lottery.service.impl.LotteryServiceImpl;
+import com.zf.lottery.service.LotteryStatService;
+import com.zf.lottery.service.impl.LotteryStatServiceImpl;
 
 import java.util.List;
 
@@ -59,8 +59,8 @@ public class LotteriesActivity extends BaseActivity implements LotteryResultsLis
 
     @Override
     public void onRequest(List<Lottery> lotteries) {
-        LotteryService lotteryService = new LotteryServiceImpl();
-        List<Pair<String, Integer>> occurList = lotteryService.sortNumberOccurrences(lotteries);
+        LotteryStatService lotteryStatService = new LotteryStatServiceImpl();
+        List<Pair<String, Integer>> occurList = lotteryStatService.getNumberStat(lotteries);
         ((RecyclerView) findViewById(R.id.occurListView)).setAdapter(new StatListAdapter(occurList));
     }
 }
