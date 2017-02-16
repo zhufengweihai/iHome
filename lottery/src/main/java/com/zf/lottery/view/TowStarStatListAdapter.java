@@ -18,7 +18,7 @@ import java.util.List;
 public class TowStarStatListAdapter extends RecyclerView.Adapter<TowStarStatListAdapter.ItemViewHolder> {
     private List<TowStarStatData> statDatas = null;
 
-    public TowStarStatListAdapter(List<TowStarStatData> lotteries) {
+    public TowStarStatListAdapter(List<TowStarStatData> statDatas) {
         this.statDatas = statDatas;
     }
 
