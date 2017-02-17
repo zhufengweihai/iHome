@@ -15,7 +15,6 @@
         android:id="@+id/occurCount1View"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:layout_weight="1"
         android:gravity="center"/>
 
@@ -30,7 +29,6 @@
         android:id="@+id/occurCount2View"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:layout_weight="1"
         android:gravity="center"/>
 
@@ -38,7 +36,6 @@
         android:id="@+id/totalOccurCountView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:layout_weight="1"
         android:gravity="center"/>
 </LinearLayout>

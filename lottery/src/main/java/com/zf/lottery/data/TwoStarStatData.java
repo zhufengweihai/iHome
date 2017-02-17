@@ -6,7 +6,7 @@ import org.apache.commons.lang3.StringUtils;
  * Created by Administrator on 2017/2/14 0014.
  */
 
-public class TowStarStatData extends StatData {
+public class TwoStarStatData extends StatData {
     private String pair1 = null;
     private String pair2 = null;
     private int notOccurCount1 = 0;

@@ -1,7 +1,7 @@
 <resources>
     <string name="term">%d期</string>
-    <string name="tow_star_number1">二星复选1</string>
-    <string name="tow_star_number2">二星复选2</string>
-    <string name="not_occur_number">未出现期数</string>
-    <string name="total_not_occur_number">总未出现期数</string>
+    <string name="tow_star_number1">号对1</string>
+    <string name="tow_star_number2">号对2</string>
+    <string name="not_occur_number">未出数</string>
+    <string name="total_not_occur_number">未出和</string>
 </resources>

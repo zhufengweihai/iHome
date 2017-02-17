@@ -7,7 +7,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.zf.lottery.R;
-import com.zf.lottery.data.TowStarStatData;
+import com.zf.lottery.data.StatData;
+import com.zf.lottery.data.TwoStarStatData;
 
 import java.util.List;
 
@@ -16,9 +17,9 @@ import java.util.List;
  */
 
 public class TowStarStatListAdapter extends RecyclerView.Adapter<TowStarStatListAdapter.ItemViewHolder> {
-    private List<TowStarStatData> statDatas = null;
+    private List<StatData> statDatas = null;
 
-    public TowStarStatListAdapter(List<TowStarStatData> statDatas) {
+    public TowStarStatListAdapter(List<StatData> statDatas) {
         this.statDatas = statDatas;
     }
 
@@ -31,10 +32,10 @@ public class TowStarStatListAdapter extends RecyclerView.Adapter<TowStarStatList
 
     @Override
     public void onBindViewHolder(TowStarStatListAdapter.ItemViewHolder holder, int position) {
-        TowStarStatData statData = statDatas.get(position);
-        holder.towStart1View.setText(statData.getTowStart1());
+        TwoStarStatData statData = (TwoStarStatData) statDatas.get(position);
+        holder.towStart1View.setText(statData.getPair1());
         holder.notOccurCount1View.setText(String.valueOf(statData.getNotOccurCount1()));
-        holder.towStart2View.setText(statData.getTowStart2());
+        holder.towStart2View.setText(statData.getPair2());
         holder.notOccurCount2View.setText(String.valueOf(statData.getNotOccurCount2()));
         holder.totalNotOccurCountView.setText(String.valueOf(statData.getTotalNotOccurCount()));
     }
