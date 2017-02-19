@@ -41,49 +41,24 @@
                 android:orientation="horizontal">
 
                 <android.support.v7.widget.AppCompatRadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:button="@null"
-                    android:gravity="center"
-                    android:text="@string/tow_star_number1"
-                    android:textSize="15sp"/>
+                    style="@style/buttonTitle"
+                    android:text="@string/tow_star_number1"/>
 
                 <android.support.v7.widget.AppCompatRadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:button="@null"
-                    android:gravity="center"
-                    android:text="@string/not_occur_number"
-                    android:textSize="15sp"/>
+                    style="@style/buttonTitle"
+                    android:text="@string/not_occur_number"/>
 
                 <android.support.v7.widget.AppCompatRadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:button="@null"
-                    android:gravity="center"
-                    android:text="@string/tow_star_number2"
-                    android:textSize="15sp"/>
+                    style="@style/buttonTitle"
+                    android:text="@string/tow_star_number2"/>
 
                 <android.support.v7.widget.AppCompatRadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:button="@null"
-                    android:gravity="center"
-                    android:text="@string/not_occur_number"
-                    android:textSize="15sp"/>
+                    style="@style/buttonTitle"
+                    android:text="@string/not_occur_number"/>
 
                 <android.support.v7.widget.AppCompatRadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:button="@null"
-                    android:gravity="center"
-                    android:text="@string/total_not_occur_number"
-                    android:textSize="15sp"/>
+                    style="@style/buttonTitle"
+                    android:text="@string/total_not_occur_number"/>
             </RadioGroup>
 
             <android.support.v7.widget.RecyclerView

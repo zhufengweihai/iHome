@@ -23,8 +23,12 @@ public class TowStarStatListAdapter extends RecyclerView.Adapter<TowStarStatList
         this.statDatas = statDatas;
     }
 
-    @Override
+    public void setStatDatas(List<StatData> statDatas) {
+        this.statDatas = statDatas;
+        notifyDataSetChanged();
+    }
 
+    @Override
     public TowStarStatListAdapter.ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         return new ItemViewHolder(inflater.inflate(R.layout.item_tow_star, parent, false));
@@ -38,6 +42,9 @@ public class TowStarStatListAdapter extends RecyclerView.Adapter<TowStarStatList
         holder.towStart2View.setText(statData.getPair2());
         holder.notOccurCount2View.setText(String.valueOf(statData.getNotOccurCount2()));
         holder.totalNotOccurCountView.setText(String.valueOf(statData.getTotalNotOccurCount()));
+        if (position % 2 == 1) {
+            holder.itemView.setBackgroundColor(holder.itemView.getContext().getResources().getColor(R.color.colorBackground));
+        }
     }
 
     @Override
