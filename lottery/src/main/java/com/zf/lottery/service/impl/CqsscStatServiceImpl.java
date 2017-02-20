@@ -38,9 +38,9 @@ public class CqsscStatServiceImpl implements LotteryStatService {
                 statData = new TwoStarStatData();
                 statData.setPair1(pair1);
                 statData.setNotOccurCount1(i);
-                statData.setTotalNotOccurCount(500 + i);
+                statData.setTotalNotOccurCount(1000 + i);
                 map.put(pair1, statData);
-            } else {
+            } else if (statData.getPair2() == null) {
                 statData.setPair2(pair1);
                 statData.setNotOccurCount2(i);
                 statData.setTotalNotOccurCount(statData.getNotOccurCount1() + i);

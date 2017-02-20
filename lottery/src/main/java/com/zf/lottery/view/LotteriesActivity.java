@@ -62,7 +62,7 @@ public class LotteriesActivity extends BaseActivity implements LotteryResultsLis
                         } else if (i == 4) {
                             positionCompare = TowStarStatDataComparator.POSITION_COMPARE_TOTAL_ABSENCE;
                         }
-                        Collections.sort(statDatas, new TowStarStatDataComparator(true, positionCompare));
+                        Collections.sort(statDatas, new TowStarStatDataComparator(false, positionCompare));
                         statListAdapter.setStatDatas(statDatas);
                     }
                 }
@@ -94,7 +94,7 @@ public class LotteriesActivity extends BaseActivity implements LotteryResultsLis
     public void onRequest(List<Lottery> lotteries) {
         LotteryStatService lotteryStatService = new CqsscStatServiceImpl();
         statDatas = lotteryStatService.getNumberStat(lotteries);
-        Collections.sort(statDatas, new TowStarStatDataComparator());
+        //Collections.sort(statDatas, new TowStarStatDataComparator());
         statListAdapter.setStatDatas(statDatas);
     }
 }

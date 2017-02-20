@@ -11,14 +11,19 @@ import com.zf.lottery.dao.LotteryResultsListener;
 import com.zf.lottery.data.Lottery;
 import com.zf.lottery.data.LotteryClass;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by Administrator on 2017/2/6 0006.
@@ -60,7 +65,7 @@ public class LotteryClassDaoImpl implements LotteryClassDao {
 
     @Override
     public void requestLotteryResults(final LotteryResultsListener listener) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd%20HH:mm:ss");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd%20HH:mm:ss", Locale.getDefault());
         List<Lottery> lotteries = new ArrayList<>();
         String url = String.format(URL_RESULT, dateFormat.format(new Date()));
         requestLotteryResult(listener, lotteries, url);
@@ -86,12 +91,17 @@ public class LotteryClassDaoImpl implements LotteryClassDao {
                         lotteries.add(lottery);
                     }
                     int size = lotteries.size();
-                    if (size < 500) {
-                        String url = String.format(URL_RESULT, lotteries.get(size - 1).getTime().replace(" ", "%20"));
+                    if (size < 1000) {
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+                        Date date = dateFormat.parse(lotteries.get(size - 1).getTime());
+                        date.setTime(date.getTime() - 60000);
+                        String url = String.format(URL_RESULT, new SimpleDateFormat("yyyy-MM-dd%20HH:mm:ss", Locale.getDefault()).format(date));
                         requestLotteryResult(listener, lotteries, url);
                     }
                     listener.onRequest(lotteries);
                 } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (ParseException e) {
                     e.printStackTrace();
                 }
             }
