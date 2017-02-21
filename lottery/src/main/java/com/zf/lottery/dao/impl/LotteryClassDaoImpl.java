@@ -5,19 +5,17 @@ import com.yolanda.nohttp.rest.Request;
 import com.yolanda.nohttp.rest.Response;
 import com.yolanda.nohttp.rest.SimpleResponseListener;
 import com.zf.common.NoHttpUtils;
+import com.zf.lottery.common.Commons;
 import com.zf.lottery.dao.LotteryClassDao;
 import com.zf.lottery.dao.LotteryClassListener;
 import com.zf.lottery.dao.LotteryResultsListener;
 import com.zf.lottery.data.Lottery;
 import com.zf.lottery.data.LotteryClass;
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.time.DateUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -91,7 +89,7 @@ public class LotteryClassDaoImpl implements LotteryClassDao {
                         lotteries.add(lottery);
                     }
                     int size = lotteries.size();
-                    if (size < 1000) {
+                    if (size < Commons.MAX_LOTTERY_TERM) {
                         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
                         Date date = dateFormat.parse(lotteries.get(size - 1).getTime());
                         date.setTime(date.getTime() - 60000);

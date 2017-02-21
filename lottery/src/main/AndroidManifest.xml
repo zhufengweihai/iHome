@@ -8,6 +8,10 @@
         <activity
             android:name=".view.LotteriesActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.TwoStarStatLoadingActivity"
+            android:theme="@style/LoadingDialogStyle">
+        </activity>
     </application>
 
 </manifest>
