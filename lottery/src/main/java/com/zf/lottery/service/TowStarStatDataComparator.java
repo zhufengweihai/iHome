@@ -54,7 +54,7 @@ public class TowStarStatDataComparator implements Comparator<StatData> {
             } else if (data1.getNotOccurCount2() < data2.getNotOccurCount2()) {
                 return -1;
             } else {
-                return data1.getPair2().compareTo(data2.getPair2());
+                return 0;
             }
         } else {
             if (data1.getTotalNotOccurCount() > data2.getTotalNotOccurCount()) {

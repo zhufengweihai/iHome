@@ -5,7 +5,7 @@ package com.zf.lottery.common;
  */
 
 public interface Commons {
-    int MAX_LOTTERY_TERM = 1000;
-    int REQUEST_CODE_LOTTERY_RESULT = 1000;
+    int MAX_LOTTERY_TERM = 900;
+    int REQUEST_CODE_LOTTERY_RESULT = 0;
     String RETURN_VALUE_LOTTERY_RESULT = "lottery_result";
 }

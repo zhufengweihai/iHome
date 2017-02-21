@@ -96,6 +96,9 @@ public class LotteryClassDaoImpl implements LotteryClassDao {
                         String url = String.format(URL_RESULT, new SimpleDateFormat("yyyy-MM-dd%20HH:mm:ss", Locale.getDefault()).format(date));
                         requestLotteryResult(listener, lotteries, url);
                     }
+//                    if (size == Commons.MAX_LOTTERY_TERM / 2) {
+//                        Thread.sleep(5000);
+//                    }
                     listener.onRequest(lotteries);
                 } catch (JSONException e) {
                     e.printStackTrace();
