@@ -1,13 +1,13 @@
 package com.zf.ihome;
 
+import android.os.Bundle;
 import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-
-import com.zf.common.widget.dragdrop.DragdropView;
+import android.view.Menu;
 
 import java.util.ArrayList;
 
@@ -19,13 +19,23 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
 
         ArrayList<Pair<Integer, Integer>> appList = new ArrayList<>();
         Pair<Integer, Integer> pair = new Pair<>(R.mipmap.nav_lottery, R.string.nav_lottery);
         appList.add(pair);
+        Pair<Integer, Integer> pair1 = new Pair<>(R.mipmap.nav_lottery, R.string.nav_lottery);
+        appList.add(pair1);
         AppListAdapter adapter = new AppListAdapter(appList);
-        DragdropView appListView = (DragdropView) findViewById(R.id.appListView);
+        RecyclerView appListView = (RecyclerView) findViewById(R.id.appListView);
         appListView.setAdapter(adapter);
+        appListView.setLayoutManager(new LinearLayoutManager(this));
+        appListView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL));
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.home, menu);
+        return true;
     }
 }

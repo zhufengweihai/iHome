@@ -9,8 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.zf.common.widget.dragdrop.ItemTouchHelperAdapter;
-import com.zf.common.widget.dragdrop.ItemTouchHelperViewHolder;
 import com.zf.lottery.view.LotteriesActivity;
 
 import java.util.List;
@@ -19,7 +17,7 @@ import java.util.List;
  * Created by Administrator on 2017/2/13 0013.
  */
 
-public class AppListAdapter extends RecyclerView.Adapter<AppListAdapter.ItemViewHolder>implements ItemTouchHelperAdapter {
+public class AppListAdapter extends RecyclerView.Adapter<AppListAdapter.ItemViewHolder> {
     private List<Pair<Integer, Integer>> appList = null;
 
     public AppListAdapter(List<Pair<Integer, Integer>> appList) {
@@ -51,30 +49,15 @@ public class AppListAdapter extends RecyclerView.Adapter<AppListAdapter.ItemView
         return appList == null ? 0 : appList.size();
     }
 
-    @Override
-    public boolean onItemMove(int fromPosition, int toPosition) {
-        return false;
-    }
-
-    @Override
-    public void onItemDismiss(int position) {
-
-    }
-
-    protected static class ItemViewHolder extends RecyclerView.ViewHolder implements
-            ItemTouchHelperViewHolder {
+    protected static class ItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public ItemViewHolder(View itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
         }
 
         @Override
-        public void onItemSelected() {
-            itemView.getContext().startActivity(new Intent(itemView.getContext(), LotteriesActivity.class));
-        }
-
-        @Override
-        public void onItemClear() {
-
+        public void onClick(View v) {
+            v.getContext().startActivity(new Intent(v.getContext(), LotteriesActivity.class));
         }
     }
 }
