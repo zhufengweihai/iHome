@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView appListView = (RecyclerView) findViewById(R.id.appListView);
         appListView.setAdapter(adapter);
         appListView.setLayoutManager(new LinearLayoutManager(this));
-        appListView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL));
+        appListView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
     }
 
     @Override

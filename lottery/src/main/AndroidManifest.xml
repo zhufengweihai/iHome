@@ -12,6 +12,10 @@
             android:name=".view.TwoStarStatLoadingActivity"
             android:theme="@style/LoadingDialogStyle">
         </activity>
+        <activity
+            android:name=".view.SscActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>

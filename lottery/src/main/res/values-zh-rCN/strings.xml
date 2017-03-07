@@ -4,4 +4,9 @@
     <string name="tow_star_number2">号对2</string>
     <string name="not_occur_number">未出数</string>
     <string name="total_not_occur_number">未出和</string>
+    <string-array name="ssc">
+        <item>组选排序</item>
+        <item>近期开奖</item>
+        <item>数据统计</item>
+    </string-array>
 </resources>

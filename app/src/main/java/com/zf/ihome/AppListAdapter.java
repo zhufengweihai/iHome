@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.zf.lottery.view.LotteriesActivity;
+import com.zf.lottery.view.SscActivity;
 
 import java.util.List;
 
@@ -36,12 +37,8 @@ public class AppListAdapter extends RecyclerView.Adapter<AppListAdapter.ItemView
         Drawable drawable = holder.itemView.getContext().getResources().getDrawable(app.first);
         String string = holder.itemView.getContext().getResources().getString(app.second);
         TextView itemView = (TextView) holder.itemView;
-        itemView.setCompoundDrawables(drawable, null, null, null);
+       // itemView.setCompoundDrawables(drawable, null, null, null);
         itemView.setText(string);
-        if (position % 2 == 1) {
-            int color = holder.itemView.getContext().getResources().getColor(R.color.colorBackground);
-            holder.itemView.setBackgroundColor(color);
-        }
     }
 
     @Override
@@ -57,7 +54,7 @@ public class AppListAdapter extends RecyclerView.Adapter<AppListAdapter.ItemView
 
         @Override
         public void onClick(View v) {
-            v.getContext().startActivity(new Intent(v.getContext(), LotteriesActivity.class));
+            v.getContext().startActivity(new Intent(v.getContext(), SscActivity.class));
         }
     }
 }

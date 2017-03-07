@@ -42,9 +42,9 @@ public class TowStarStatListAdapter extends RecyclerView.Adapter<TowStarStatList
         holder.towStart2View.setText(statData.getPair2());
         holder.notOccurCount2View.setText(String.valueOf(statData.getNotOccurCount2()));
         holder.totalNotOccurCountView.setText(String.valueOf(statData.getTotalNotOccurCount()));
-        if (position % 2 == 1) {
-            holder.itemView.setBackgroundColor(holder.itemView.getContext().getResources().getColor(R.color.colorBackground));
-        }
+//        if (position % 2 == 1) {
+//            holder.itemView.setBackgroundColor(holder.itemView.getContext().getResources().getColor(R.color.colorBackground));
+//        }
     }
 
     @Override
