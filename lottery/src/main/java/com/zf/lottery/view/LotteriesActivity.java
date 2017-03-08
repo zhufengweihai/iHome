@@ -69,7 +69,7 @@ public class LotteriesActivity extends BaseActivity implements LotteryResultsLis
         });
         ((RecyclerView) findViewById(R.id.occurListView)).setLayoutManager(new LinearLayoutManager(this));
 
-        startActivityForResult(new Intent(this, TwoStarStatLoadingActivity.class), Commons.REQUEST_CODE_LOTTERY_RESULT);
+        startActivityForResult(new Intent(this, LotteryLoadingActivity.class), Commons.REQUEST_CODE_LOTTERY_RESULT);
     }
 
 

@@ -26,7 +26,7 @@ public class SscActivity extends BaseActivity {
         getSupportActionBar().setTitle("时时彩");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        startActivityForResult(new Intent(this, TwoStarStatLoadingActivity.class), Commons.REQUEST_CODE_LOTTERY_RESULT);
+        startActivityForResult(new Intent(this, LotteryLoadingActivity.class), Commons.REQUEST_CODE_LOTTERY_RESULT);
     }
 
     @Override

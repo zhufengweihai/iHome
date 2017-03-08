@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="buttonTitle" >
+    <style name="buttonTitle">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_weight">1</item>
@@ -9,5 +9,14 @@
         <item name="android:gravity">center</item>
         <item name="android:textColor">@drawable/textcolor_button_title</item>
         <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="textTitle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/textColor</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:background">@color/colorBackground</item>
     </style>
 </resources>

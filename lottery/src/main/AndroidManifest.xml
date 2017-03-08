@@ -9,7 +9,7 @@
             android:name=".view.LotteriesActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".view.TwoStarStatLoadingActivity"
+            android:name=".view.LotteryLoadingActivity"
             android:theme="@style/LoadingDialogStyle">
         </activity>
         <activity

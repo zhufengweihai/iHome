@@ -31,7 +31,7 @@ public class SscResultListAdapter extends RecyclerView.Adapter<SscResultListAdap
     @Override
     public void onBindViewHolder(SscResultListAdapter.ItemViewHolder holder, int position) {
         Lottery lottery = (Lottery) lotteries.get(position);
-        holder.timeView.setText(lottery.getTime().substring(5, 16));
+        holder.timeView.setText(lottery.getTime().substring(11, 16));
         holder.termView.setText(lottery.getTerm().substring(8, 11));
         holder.numbersView.setText(getNumberString(lottery.getNumbers()));
     }
@@ -42,7 +42,7 @@ public class SscResultListAdapter extends RecyclerView.Adapter<SscResultListAdap
         for (int i = 0; ; i++) {
             sb.append(numbers[i]);
             if (i == iMax) return sb.toString();
-            sb.append(" ");
+            sb.append("     ");
         }
     }
 
