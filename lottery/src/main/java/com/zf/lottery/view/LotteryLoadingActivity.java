@@ -5,9 +5,9 @@ import android.os.Bundle;
 
 import com.zf.common.app.LoadingActivity;
 import com.zf.lottery.common.Commons;
-import com.zf.lottery.dao.LotteryClassDao;
+import com.zf.lottery.dao.LotteryDao;
 import com.zf.lottery.dao.LotteryResultsListener;
-import com.zf.lottery.dao.impl.LotteryClassDaoImpl;
+import com.zf.lottery.dao.impl.SscDaoImpl;
 import com.zf.lottery.data.Lottery;
 
 import java.util.ArrayList;
@@ -22,8 +22,8 @@ public class LotteryLoadingActivity extends LoadingActivity implements LotteryRe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        LotteryClassDao lotteryClassDao = new LotteryClassDaoImpl();
-        lotteryClassDao.requestLotteryResults(this);
+        LotteryDao lotteryDao = new SscDaoImpl();
+        lotteryDao.obtainLotteryResults(this);
     }
 
     @Override
