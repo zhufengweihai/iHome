@@ -28,6 +28,11 @@ public class CqsscStatServiceImpl implements LotteryStatService {
         return list;
     }
 
+    @Override
+    public int[] listMaxStat(List<Lottery> lotteries) {
+        return new int[0];
+    }
+
     private void getStatData(Map<Integer, TwoStarStatData> map, int[] numbers, int i) {
         int pair1 = numbers[3] * 10 + numbers[4];
         TwoStarStatData statData = map.get(pair1);

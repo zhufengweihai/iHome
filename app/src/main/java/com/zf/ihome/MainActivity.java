@@ -24,8 +24,6 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<Pair<Integer, Integer>> appList = new ArrayList<>();
         Pair<Integer, Integer> pair = new Pair<>(R.mipmap.nav_lottery, R.string.nav_lottery);
         appList.add(pair);
-        Pair<Integer, Integer> pair1 = new Pair<>(R.mipmap.nav_lottery, R.string.nav_lottery);
-        appList.add(pair1);
         AppListAdapter adapter = new AppListAdapter(appList);
         RecyclerView appListView = (RecyclerView) findViewById(R.id.appListView);
         appListView.setAdapter(adapter);

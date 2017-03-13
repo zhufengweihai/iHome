@@ -13,4 +13,6 @@ import java.util.List;
 
 public interface LotteryStatService {
     List<StatData> getNumberStat(List<Lottery> lotteries);
+
+    int[] listMaxStat(List<Lottery> lotteries);
 }

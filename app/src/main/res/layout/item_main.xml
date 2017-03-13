@@ -3,8 +3,8 @@
           android:id="@+id/appItem"
           android:layout_width="match_parent"
           android:layout_height="50dp"
-          android:drawableLeft="@mipmap/nav_lottery"
-          android:drawablePadding="10dp"
+          android:drawablePadding="30dp"
           android:gravity="center_vertical"
+          android:paddingLeft="20dp"
           android:textSize="20sp">
 </TextView>

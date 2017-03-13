@@ -37,7 +37,7 @@ public class AppListAdapter extends RecyclerView.Adapter<AppListAdapter.ItemView
         Drawable drawable = holder.itemView.getContext().getResources().getDrawable(app.first);
         String string = holder.itemView.getContext().getResources().getString(app.second);
         TextView itemView = (TextView) holder.itemView;
-       // itemView.setCompoundDrawables(drawable, null, null, null);
+        itemView.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
         itemView.setText(string);
     }
 

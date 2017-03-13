@@ -40,6 +40,11 @@ public class LotteryStatServiceImpl implements LotteryStatService {
         return null;
     }
 
+    @Override
+    public int[] listMaxStat(List<Lottery> lotteries) {
+        return new int[0];
+    }
+
     private class PairComparator implements Comparator<Pair<Integer, Integer>> {
 
         @Override

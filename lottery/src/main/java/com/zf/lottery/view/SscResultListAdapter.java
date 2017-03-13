@@ -9,7 +9,9 @@ import android.widget.TextView;
 import com.zf.lottery.R;
 import com.zf.lottery.data.Lottery;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by Administrator on 2017/2/13 0013.
@@ -17,6 +19,7 @@ import java.util.List;
 
 public class SscResultListAdapter extends RecyclerView.Adapter<SscResultListAdapter.ItemViewHolder> {
     private List<Lottery> lotteries = null;
+    private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
 
     public SscResultListAdapter(List<Lottery> lotteries) {
         this.lotteries = lotteries;
@@ -31,12 +34,12 @@ public class SscResultListAdapter extends RecyclerView.Adapter<SscResultListAdap
     @Override
     public void onBindViewHolder(SscResultListAdapter.ItemViewHolder holder, int position) {
         Lottery lottery = (Lottery) lotteries.get(position);
-        holder.timeView.setText(lottery.getTime().substring(11, 16));
-        holder.termView.setText(lottery.getTerm().substring(8, 11));
+        holder.timeView.setText(dateFormat.format(lottery.getTime()));
+        holder.termView.setText(lottery.getTerm() % 100);
         holder.numbersView.setText(getNumberString(lottery.getNumbers()));
     }
 
-    private String getNumberString(String[] numbers) {
+    private String getNumberString(int[] numbers) {
         int iMax = numbers.length - 1;
         StringBuilder sb = new StringBuilder();
         for (int i = 0; ; i++) {

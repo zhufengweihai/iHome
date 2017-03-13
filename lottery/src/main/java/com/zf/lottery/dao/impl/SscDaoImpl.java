@@ -32,11 +32,10 @@ import java.util.Locale;
  */
 
 public class SscDaoImpl implements LotteryDao {
-    private static final String URL = "https://route.showapi" + "" + "" + "" + "" +
-            ".com/44-6?showapi_appid=31607&showapi_sign=a5858af94b274596b7e175634a2ed269";
-    private static final String URL_RESULT = "https://route.showapi" + "" + "" + "" + "" +
-            ".com/44-2?code=cqssc&count=50&endTime=%s&showapi_appid=31607" +
-            "&showapi_sign=a5858af94b274596b7e175634a2ed269";
+    private static final String URL = "https://route.showapi.com/44-6?showapi_appid=31607&showapi_sign" +
+            "=a5858af94b274596b7e175634a2ed269";
+    private static final String URL_RESULT = "https://route.showapi.com/44-2?code=cqssc&count=50&endTime=%s" +
+            "&showapi_appid=31607&showapi_sign=a5858af94b274596b7e175634a2ed269";
     public static final int ONE_MINITE = 60 * 1000;
 
     private SimpleDateFormat urlDataFormat = new SimpleDateFormat("yyyy-MM-dd%20HH:mm", Locale.getDefault());
@@ -86,13 +85,14 @@ public class SscDaoImpl implements LotteryDao {
             for (String line : lines) {
                 Lottery lottery = new Lottery();
                 String[] strings = line.split(";");
-                lottery.setTime(Timestamp.valueOf(strings[0]));
+                lottery.setTime(dateFormat.parse(strings[0]));
                 int[] numbers = toIntArray(strings[0]);
                 lottery.setNumbers(numbers);
+                lottery.setSum(numbers[3] * 10 + numbers[4]);
                 lotteries.add(lottery);
             }
             return lotteries;
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
