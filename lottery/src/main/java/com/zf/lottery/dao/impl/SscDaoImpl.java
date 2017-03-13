@@ -20,10 +20,10 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
@@ -32,8 +32,10 @@ import java.util.Locale;
  */
 
 public class SscDaoImpl implements LotteryDao {
-    private static final String URL = "https://route.showapi.com/44-6?showapi_appid=31607&showapi_sign=a5858af94b274596b7e175634a2ed269";
-    private static final String URL_RESULT = "https://route.showapi.com/44-2?code=cqssc&count=50&endTime=%s&showapi_appid=31607" +
+    private static final String URL = "https://route.showapi" + "" + "" + "" + "" +
+            ".com/44-6?showapi_appid=31607&showapi_sign=a5858af94b274596b7e175634a2ed269";
+    private static final String URL_RESULT = "https://route.showapi" + "" + "" + "" + "" +
+            ".com/44-2?code=cqssc&count=50&endTime=%s&showapi_appid=31607" +
             "&showapi_sign=a5858af94b274596b7e175634a2ed269";
     public static final int ONE_MINITE = 60 * 1000;
 
@@ -84,8 +86,9 @@ public class SscDaoImpl implements LotteryDao {
             for (String line : lines) {
                 Lottery lottery = new Lottery();
                 String[] strings = line.split(";");
-                lottery.setTime(strings[0]);
-                lottery.setNumbers(strings[0].split(","));
+                lottery.setTime(Timestamp.valueOf(strings[0]));
+                int[] numbers = toIntArray(strings[0]);
+                lottery.setNumbers(numbers);
                 lotteries.add(lottery);
             }
             return lotteries;
@@ -95,7 +98,8 @@ public class SscDaoImpl implements LotteryDao {
         return null;
     }
 
-    private void requestLotteryResult(final LotteryResultsListener listener, final List<Lottery> historyResults, final List<Lottery> lotteries, String url) {
+    private void requestLotteryResult(final LotteryResultsListener listener, final List<Lottery> historyResults,
+                                      final List<Lottery> lotteries, String url) {
         Request request = NoHttp.createJsonObjectRequest(url);
         NoHttpUtils.instance().addRequest(0, request, new SimpleResponseListener<JSONObject>() {
 
@@ -108,21 +112,22 @@ public class SscDaoImpl implements LotteryDao {
                     Lottery lastLottery = historyResults.get(historyResults.size() - 1);
                     for (int i = 0; i < length; i++) {
                         JSONObject result = resultJsonArray.getJSONObject(i);
-                        String time = result.getString("time").substring(0, 16);
+                        Timestamp time = Timestamp.valueOf(result.getString("time").substring(0, 16));
                         if (time.compareTo(lastLottery.getTime()) > 0) {
                             Lottery lottery = new Lottery();
-                            lottery.setTerm(result.getString("expect"));
+                            lottery.setTerm(Integer.parseInt(result.getString("expect")));
                             lottery.setTime(time);
-                            lottery.setNumbers(result.getString("openCode").split(","));
+                            lottery.setNumbers(toIntArray(result.getString("openCode")));
                             lotteries.add(lottery);
                         } else {
                             lotteries.addAll(historyResults);
+                            saveHistoryResults(historyResults);
                             listener.onRequest(lotteries);
                             return;
                         }
                     }
 
-                    Date date = dateFormat.parse(lotteries.get(lotteries.size() - 1).getTime());
+                    Date date = lotteries.get(lotteries.size() - 1).getTime();
                     date.setTime(date.getTime() - ONE_MINITE);
                     String url = String.format(URL_RESULT, urlDataFormat.format(date));
                     requestLotteryResult(listener, historyResults, lotteries, url);
@@ -131,6 +136,15 @@ public class SscDaoImpl implements LotteryDao {
                 }
             }
         });
+    }
+
+    private int[] toIntArray(String string) {
+        String[] numberStrings = string.split(",");
+        int[] numbers = new int[numberStrings.length];
+        for (int i = 0; i < numbers.length; i++) {
+            numbers[i] = Integer.parseInt(numberStrings[i]);
+        }
+        return numbers;
     }
 
     private void saveHistoryResults(List<Lottery> historyResults) {
@@ -147,7 +161,7 @@ public class SscDaoImpl implements LotteryDao {
     }
 
     private String toString(Lottery result) {
-        String[] numbers = result.getNumbers();
+        int[] numbers = result.getNumbers();
         int iMax = numbers.length - 1;
         StringBuilder sb = new StringBuilder();
         sb.append(result.getTime()).append(';');

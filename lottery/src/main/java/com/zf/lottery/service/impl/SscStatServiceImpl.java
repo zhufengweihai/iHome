@@ -5,8 +5,6 @@ import com.zf.lottery.data.StatData;
 import com.zf.lottery.data.TwoStarStatData;
 import com.zf.lottery.service.LotteryStatService;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,19 +15,15 @@ import java.util.Map;
 public class SscStatServiceImpl implements LotteryStatService {
     @Override
     public List<StatData> getNumberStat(List<Lottery> lotteries) {
-        for (Lottery lottery : lotteries) {
-            String[] numbers = lottery.getNumbers();
-            String pair = numbers[3] + numbers[4];
+        int[] notOCcurs = new int[lotteries.size()];
+        int[] occurArray = new int[100];
+        int l = notOCcurs.length - 1;
+        for (int i = l; i >= 0; i--) {
+            Lottery lottery = lotteries.get(l);
+            int[] numbers = lottery.getNumbers();
+            notOCcurs[numbers[3] * 10 + numbers[4]] = 0;
         }
-        Map<String, TwoStarStatData> map = new HashMap<>();
-        int size = lotteries.size();
-        for (int i = 0; i < size; i++) {
-            String[] numbers = lotteries.get(i).getNumbers();
-            getStatData(map, numbers, i);
-        }
-        List<StatData> list = new ArrayList<>(map.size());
-        list.addAll(map.values());
-        return list;
+        return null;
     }
 
     private void getStatData(Map<String, TwoStarStatData> map, String[] numbers, int i) {

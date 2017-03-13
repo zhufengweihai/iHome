@@ -1,37 +1,38 @@
 package com.zf.lottery.data;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 /**
  * Created by Administrator on 2017/2/8 0008.
  */
 
-public class Lottery implements Serializable{
-    private String term = null;
-    private String[] numbers = null;
-    private String time = null;
+public class Lottery implements Serializable {
+    private int term = -1;
+    private int[] numbers = null;
+    private Timestamp time = null;
 
-    public String getTerm() {
+    public int getTerm() {
         return term;
     }
 
-    public void setTerm(String term) {
+    public void setTerm(int term) {
         this.term = term;
     }
 
-    public String[] getNumbers() {
+    public int[] getNumbers() {
         return numbers;
     }
 
-    public void setNumbers(String[] numbers) {
+    public void setNumbers(int[] numbers) {
         this.numbers = numbers;
     }
 
-    public String getTime() {
+    public Timestamp getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(Timestamp time) {
         this.time = time;
     }
 }
