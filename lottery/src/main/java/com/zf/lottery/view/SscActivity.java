@@ -1,5 +1,6 @@
 package com.zf.lottery.view;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -14,6 +15,10 @@ import com.zf.lottery.data.Lottery;
 
 import java.util.List;
 
+import permissions.dispatcher.NeedsPermission;
+import permissions.dispatcher.RuntimePermissions;
+
+@RuntimePermissions
 public class SscActivity extends BaseActivity {
 
     @Override
@@ -26,6 +31,11 @@ public class SscActivity extends BaseActivity {
         getSupportActionBar().setTitle("时时彩");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        PermissionsDispatcher.loadingWithCheck(this);
+    }
+
+    @NeedsPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+    public void loading() {
         startActivityForResult(new Intent(this, LotteryLoadingActivity.class), Commons.REQUEST_CODE_LOTTERY_RESULT);
     }
 
@@ -36,7 +46,8 @@ public class SscActivity extends BaseActivity {
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.sscViewPager);
         String[] titles = getResources().getStringArray(R.array.ssc);
-        SscFragment.SscPagerAdapter pagerAdapter = new SscFragment.SscPagerAdapter(getSupportFragmentManager(), titles,lotteries);
+        SscFragment.SscPagerAdapter pagerAdapter = new SscFragment.SscPagerAdapter(getSupportFragmentManager(),
+                titles, lotteries);
         viewPager.setAdapter(pagerAdapter);
         PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) findViewById(R.id.sscPagerTab);
         tabs.setViewPager(viewPager);

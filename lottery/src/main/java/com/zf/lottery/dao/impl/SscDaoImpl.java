@@ -20,7 +20,6 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -78,15 +77,15 @@ public class SscDaoImpl implements LotteryDao {
     }
 
     private List<Lottery> obtainHistoryResults() {
-        String historyPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/home/cqssc.txt";
         try {
-            List<String> lines = FileUtils.readLines(new File(historyPath), "UTF-8");
+            File file = new File(Environment.getExternalStorageDirectory(), "/home/cqssc.txt");
+            List<String> lines = FileUtils.readLines(file, "UTF-8");
             List<Lottery> lotteries = new ArrayList<>(lines.size());
             for (String line : lines) {
                 Lottery lottery = new Lottery();
                 String[] strings = line.split(";");
                 lottery.setTime(dateFormat.parse(strings[0]));
-                int[] numbers = toIntArray(strings[0]);
+                int[] numbers = toIntArray(strings[1]);
                 lottery.setNumbers(numbers);
                 lottery.setSum(numbers[3] * 10 + numbers[4]);
                 lotteries.add(lottery);
@@ -109,24 +108,27 @@ public class SscDaoImpl implements LotteryDao {
                     JSONObject jsonObject = response.get();
                     JSONArray resultJsonArray = jsonObject.getJSONObject("showapi_res_body").getJSONArray("result");
                     int length = resultJsonArray.length();
-                    Lottery lastLottery = historyResults.get(historyResults.size() - 1);
+                    Lottery lastLottery = historyResults.get(0);
                     for (int i = 0; i < length; i++) {
                         JSONObject result = resultJsonArray.getJSONObject(i);
-                        Timestamp time = Timestamp.valueOf(result.getString("time").substring(0, 16));
+                        Date time = dateFormat.parse(result.getString("time").substring(0, 16));
                         if (time.compareTo(lastLottery.getTime()) > 0) {
                             Lottery lottery = new Lottery();
-                            lottery.setTerm(Integer.parseInt(result.getString("expect")));
+                            lottery.setTerm(result.getString("expect"));
                             lottery.setTime(time);
                             lottery.setNumbers(toIntArray(result.getString("openCode")));
                             lotteries.add(lottery);
                         } else {
                             lotteries.addAll(historyResults);
-                            saveHistoryResults(historyResults);
+                            saveHistoryResults(lotteries);
                             listener.onRequest(lotteries);
                             return;
                         }
                     }
 
+                    if (lotteries.size() % 900 == 0) {
+                        Thread.sleep(15000);
+                    }
                     Date date = lotteries.get(lotteries.size() - 1).getTime();
                     date.setTime(date.getTime() - ONE_MINITE);
                     String url = String.format(URL_RESULT, urlDataFormat.format(date));

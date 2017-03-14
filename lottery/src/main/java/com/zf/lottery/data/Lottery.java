@@ -1,7 +1,6 @@
 package com.zf.lottery.data;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -9,16 +8,16 @@ import java.util.Date;
  */
 
 public class Lottery implements Serializable {
-    private int term = -1;
+    private String term = null;
     private int[] numbers = null;
     private Date time = null;
     private int sum = -1;
 
-    public int getTerm() {
+    public String getTerm() {
         return term;
     }
 
-    public void setTerm(int term) {
+    public void setTerm(String term) {
         this.term = term;
     }
 

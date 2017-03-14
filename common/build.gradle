@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         minSdkVersion 15
-        targetSdkVersion 24
+        targetSdkVersion 25
         versionCode 1
         versionName "1.0"
 
@@ -39,6 +39,8 @@ dependencies {
     compile 'io.github.francoiscampbell:circlelayout:0.3.0'
     compile 'com.github.lecho:hellocharts-library:1.5.8@aar'
     compile 'org.apache.commons.io:commonsIO:2.5.0'
+    compile 'com.github.hotchemi:permissionsdispatcher:2.3.2'
+    annotationProcessor 'com.github.hotchemi:permissionsdispatcher-processor:2.3.2'
     testCompile 'junit:junit:4.12'
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
     androidTestCompile 'com.android.support.test:runner:0.5'

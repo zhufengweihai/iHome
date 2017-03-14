@@ -35,7 +35,7 @@ public class SscResultListAdapter extends RecyclerView.Adapter<SscResultListAdap
     public void onBindViewHolder(SscResultListAdapter.ItemViewHolder holder, int position) {
         Lottery lottery = (Lottery) lotteries.get(position);
         holder.timeView.setText(dateFormat.format(lottery.getTime()));
-        holder.termView.setText(lottery.getTerm() % 100);
+        holder.termView.setText(lottery.getTerm().substring(8, 11));
         holder.numbersView.setText(getNumberString(lottery.getNumbers()));
     }
 

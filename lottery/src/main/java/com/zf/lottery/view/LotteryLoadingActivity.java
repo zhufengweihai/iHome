@@ -33,11 +33,9 @@ public class LotteryLoadingActivity extends LoadingActivity implements LotteryRe
 
     @Override
     public void onRequest(List<Lottery> lotteries) {
-        if (lotteries.size() >= Commons.MAX_LOTTERY_TERM) {
-            Intent intent = new Intent();
-            intent.putExtra(Commons.RETURN_VALUE_LOTTERY_RESULT, (ArrayList) lotteries);
-            setResult(Commons.REQUEST_CODE_LOTTERY_RESULT, intent);
-            finish();
-        }
+        Intent intent = new Intent();
+        intent.putExtra(Commons.RETURN_VALUE_LOTTERY_RESULT, (ArrayList) lotteries);
+        setResult(Commons.REQUEST_CODE_LOTTERY_RESULT, intent);
+        finish();
     }
 }
