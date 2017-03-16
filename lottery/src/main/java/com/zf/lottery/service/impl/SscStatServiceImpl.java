@@ -4,6 +4,7 @@ import com.zf.lottery.data.Lottery;
 import com.zf.lottery.data.StatData;
 import com.zf.lottery.service.LotteryStatService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,7 +16,18 @@ public class SscStatServiceImpl implements LotteryStatService {
 
     @Override
     public List<StatData> getNumberStat(List<Lottery> lotteries) {
-        return null;
+        List<Integer>[] notOCcurArray = new ArrayList[MAX_NUM];
+        int size = lotteries.size();
+        for (int i = 0; i < size; i++) {
+            int number = lotteries.get(i).getSum();
+            if (notOCcurArray[number].size() > 0) {
+                Integer last = notOCcurArray[number].get(i - 1);
+                notOCcurArray[number].add(i - last);
+            } else {
+                notOCcurArray[number].add(i);
+            }
+        }
+        return notOCcurArray;
     }
 
     @Override
