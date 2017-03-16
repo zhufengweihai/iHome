@@ -3,7 +3,6 @@ package com.zf.lottery.service.impl;
 import android.util.Pair;
 
 import com.zf.lottery.data.Lottery;
-import com.zf.lottery.data.StatData;
 import com.zf.lottery.service.LotteryStatService;
 
 import java.util.ArrayList;
@@ -20,7 +19,7 @@ import java.util.Set;
 
 public class LotteryStatServiceImpl implements LotteryStatService {
     @Override
-    public List<StatData> getNumberStat(List<Lottery> lotteries) {
+    public List<Integer>[] getNumberStat(List<Lottery> lotteries) {
         Map<Integer, Integer> map = new HashMap<>();
         int size = lotteries.size();
         for (int i = 0; i < size; i++) {

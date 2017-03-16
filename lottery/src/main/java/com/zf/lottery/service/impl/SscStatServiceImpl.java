@@ -1,7 +1,6 @@
 package com.zf.lottery.service.impl;
 
 import com.zf.lottery.data.Lottery;
-import com.zf.lottery.data.StatData;
 import com.zf.lottery.service.LotteryStatService;
 
 import java.util.ArrayList;
@@ -15,7 +14,7 @@ public class SscStatServiceImpl implements LotteryStatService {
     public static final int MAX_NUM = 100;
 
     @Override
-    public List<StatData> getNumberStat(List<Lottery> lotteries) {
+    public List<Integer>[] getNumberStat(List<Lottery> lotteries) {
         List<Integer>[] notOCcurArray = new ArrayList[MAX_NUM];
         int size = lotteries.size();
         for (int i = 0; i < size; i++) {

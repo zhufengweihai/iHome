@@ -12,10 +12,12 @@ import android.widget.RadioGroup;
 import com.zf.lottery.R;
 import com.zf.lottery.data.Lottery;
 import com.zf.lottery.data.StatData;
+import com.zf.lottery.data.TwoStarStatData;
 import com.zf.lottery.service.LotteryStatService;
 import com.zf.lottery.service.TowStarStatDataComparator;
 import com.zf.lottery.service.impl.CqsscStatServiceImpl;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -29,7 +31,19 @@ public class TwoStarSortViewProxy {
     public TwoStarSortViewProxy(LayoutInflater inflater, ViewGroup root, List<Lottery> lotteries) {
         view = inflater.inflate(R.layout.view_2_sort, root, false);
         LotteryStatService lotteryStatService = new CqsscStatServiceImpl();
-        final List<StatData> statDatas = lotteryStatService.getNumberStat(lotteries);
+        final List<Integer>[] notOCcurArray = lotteryStatService.getNumberStat(lotteries);
+        final List<StatData> statDatas = new ArrayList<>();
+        for (int i = 0; i < notOCcurArray.length / 2; i++) {
+            TwoStarStatData statData = new TwoStarStatData();
+            statData.setPair1(String.valueOf(i));
+            statData.setNotOccurCount1(notOCcurArray[i].get(0));
+            int pair2 = (i % 10) * 10 + i / 10;
+            if (pair2 != i) {
+                statData.setPair2(String.valueOf(pair2));
+                statData.setNotOccurCount1(notOCcurArray[pair2].get(0));
+            }
+            statData.setTotalNotOccurCount(statData.getNotOccurCount1() + statData.getNotOccurCount2());
+        }
         Collections.sort(statDatas, new TowStarStatDataComparator());
         final TowStarStatListAdapter statListAdapter = new TowStarStatListAdapter(statDatas);
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.occurListView);

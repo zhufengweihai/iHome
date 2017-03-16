@@ -16,7 +16,7 @@ import java.util.Map;
 
 public class CqsscStatServiceImpl implements LotteryStatService {
     @Override
-    public List<StatData> getNumberStat(List<Lottery> lotteries) {
+    public List<Integer>[] getNumberStat(List<Lottery> lotteries) {
         Map<Integer, TwoStarStatData> map = new HashMap<>();
         int size = lotteries.size();
         for (int i = 0; i < size; i++) {
@@ -25,7 +25,7 @@ public class CqsscStatServiceImpl implements LotteryStatService {
         }
         List<StatData> list = new ArrayList<>(map.size());
         list.addAll(map.values());
-        return list;
+        return null;
     }
 
     @Override

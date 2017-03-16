@@ -12,7 +12,7 @@ import java.util.List;
  */
 
 public interface LotteryStatService {
-    List<StatData> getNumberStat(List<Lottery> lotteries);
+    List<Integer>[] getNumberStat(List<Lottery> lotteries);
 
     int[] listMaxStat(List<Lottery> lotteries);
 }
