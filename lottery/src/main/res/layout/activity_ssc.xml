@@ -21,7 +21,8 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <LinearLayout
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -42,5 +43,5 @@
             app:showUnderline="true"
             app:textIndicatorColor="@color/colorPrimary"
             app:underlineHeight="1dp"/>
-    </LinearLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>
 </android.support.design.widget.CoordinatorLayout>

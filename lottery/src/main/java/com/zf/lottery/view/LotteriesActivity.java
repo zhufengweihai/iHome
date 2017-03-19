@@ -21,6 +21,7 @@ import com.zf.lottery.data.StatData;
 import com.zf.lottery.service.LotteryStatService;
 import com.zf.lottery.service.TowStarStatDataComparator;
 import com.zf.lottery.service.impl.CqsscStatServiceImpl;
+import com.zf.lottery.service.impl.SscStatServiceImpl;
 
 import java.util.Collections;
 import java.util.List;
@@ -98,8 +99,8 @@ public class LotteriesActivity extends BaseActivity implements LotteryResultsLis
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         List<Lottery> lotteries = (List<Lottery>) data.getSerializableExtra(Commons.RETURN_VALUE_LOTTERY_RESULT);
-        LotteryStatService lotteryStatService = new CqsscStatServiceImpl();
-        statDatas = lotteryStatService.getNumberStat(lotteries);
+        LotteryStatService lotteryStatService = new SscStatServiceImpl();
+        //statDatas = lotteryStatService.getNumberStat(lotteries);
         Collections.sort(statDatas, new TowStarStatDataComparator());
         statListAdapter.setStatDatas(statDatas);
     }

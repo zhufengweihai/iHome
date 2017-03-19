@@ -16,11 +16,15 @@ public class SscStatServiceImpl implements LotteryStatService {
     @Override
     public List<Integer>[] getNumberStat(List<Lottery> lotteries) {
         List<Integer>[] notOCcurArray = new ArrayList[MAX_NUM];
+        for (int i = 0; i < MAX_NUM; i++) {
+            notOCcurArray[i] = new ArrayList<>();
+        }
         int size = lotteries.size();
         for (int i = 0; i < size; i++) {
             int number = lotteries.get(i).getSum();
-            if (notOCcurArray[number].size() > 0) {
-                Integer last = notOCcurArray[number].get(i - 1);
+            int s = notOCcurArray[number].size();
+            if (s > 0) {
+                Integer last = notOCcurArray[number].get(s - 1);
                 notOCcurArray[number].add(i - last);
             } else {
                 notOCcurArray[number].add(i);

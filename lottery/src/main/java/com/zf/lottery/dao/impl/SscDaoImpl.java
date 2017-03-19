@@ -116,7 +116,9 @@ public class SscDaoImpl implements LotteryDao {
                             Lottery lottery = new Lottery();
                             lottery.setTerm(result.getString("expect"));
                             lottery.setTime(time);
-                            lottery.setNumbers(toIntArray(result.getString("openCode")));
+                            int[] numbers = toIntArray(result.getString("openCode"));
+                            lottery.setNumbers(numbers);
+                            lottery.setSum(numbers[3] * 10 + numbers[4]);
                             lotteries.add(lottery);
                         } else {
                             lotteries.addAll(historyResults);
@@ -166,7 +168,7 @@ public class SscDaoImpl implements LotteryDao {
         int[] numbers = result.getNumbers();
         int iMax = numbers.length - 1;
         StringBuilder sb = new StringBuilder();
-        sb.append(result.getTime()).append(';');
+        sb.append(dateFormat.format(result.getTime())).append(';');
         for (int i = 0; ; i++) {
             sb.append(numbers[i]);
             if (i == iMax) return sb.toString();

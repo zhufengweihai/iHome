@@ -15,7 +15,7 @@ import com.zf.lottery.data.StatData;
 import com.zf.lottery.data.TwoStarStatData;
 import com.zf.lottery.service.LotteryStatService;
 import com.zf.lottery.service.TowStarStatDataComparator;
-import com.zf.lottery.service.impl.CqsscStatServiceImpl;
+import com.zf.lottery.service.impl.SscStatServiceImpl;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,7 +30,7 @@ public class TwoStarSortViewProxy {
 
     public TwoStarSortViewProxy(LayoutInflater inflater, ViewGroup root, List<Lottery> lotteries) {
         view = inflater.inflate(R.layout.view_2_sort, root, false);
-        LotteryStatService lotteryStatService = new CqsscStatServiceImpl();
+        LotteryStatService lotteryStatService = new SscStatServiceImpl();
         final List<Integer>[] notOCcurArray = lotteryStatService.getNumberStat(lotteries);
         final List<StatData> statDatas = new ArrayList<>();
         for (int i = 0; i < notOCcurArray.length / 2; i++) {
