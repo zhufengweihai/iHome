@@ -47,25 +47,4 @@ class PermissionsDispatcher {
                 break;
         }
     }
-
-    private static final class ShowCameraPermissionRequest implements PermissionRequest {
-        private final WeakReference<SscActivity> weakTarget;
-
-        private ShowCameraPermissionRequest(SscActivity target) {
-            this.weakTarget = new WeakReference<SscActivity>(target);
-        }
-
-        @Override
-        public void proceed() {
-            SscActivity target = weakTarget.get();
-            if (target == null) return;
-            ActivityCompat.requestPermissions(target, PERMISSION_EXTERNAL_STORAGE, REQUEST_EXTERNAL_STORAGE);
-        }
-
-        @Override
-        public void cancel() {
-            SscActivity target = weakTarget.get();
-            if (target == null) return;
-        }
-    }
 }

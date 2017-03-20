@@ -75,7 +75,7 @@ public class SscActivity extends BaseActivity {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        LotteryDao lotteryDao = new SscDaoImpl();
+                        LotteryDao lotteryDao = new SscDaoImpl(SscActivity.this);
                         lotteryDao.obtainLotteryResults(new LotteryResultsListener() {
                             @Override
                             public void onRequest(List<Lottery> lotteries) {

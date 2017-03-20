@@ -22,8 +22,8 @@ public class LotteryLoadingActivity extends LoadingActivity implements LotteryRe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        LotteryDao lotteryDao = new SscDaoImpl();
-        lotteryDao.obtainLotteryResults(this);
+//        LotteryDao lotteryDao = new SscDaoImpl();
+//        lotteryDao.obtainLotteryResults(this);
     }
 
     @Override

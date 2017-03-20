@@ -60,8 +60,8 @@ public class SscStatViewProxy {
         LotteryStatService statService = new SscStatServiceImpl();
         int[] notOCcurs = statService.listMaxStat(lotteries);
         List<PointValue> values = new ArrayList<PointValue>();
-        for (int i = 0; i < notOCcurs.length; ++i) {
-            values.add(new PointValue(i, notOCcurs[i]));
+        for (int i = 0; i < 10000; ++i) {
+            values.add(new PointValue(i, notOCcurs[notOCcurs.length - 10000 + i]));
         }
 
         Line line = new Line(values);

@@ -2,11 +2,14 @@ package com.zf.lottery.dao.impl;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.zf.lottery.data.Lottery;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -24,8 +27,8 @@ public class LotteryDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE IF NOT EXISTS ssc (term INTEGER primary key, openTime INTEGER, n1 smallint, n2 " +
-                "smallint" + ", n3 smallint, n4 smallint, n5 smallint,sum smallint, maxAbsence smallint)");
+        db.execSQL("CREATE TABLE IF NOT EXISTS ssc (term INTEGER primary key, openTime INTEGER, n1 smallint, " +
+                "n2 smallint, n3 smallint, n4 smallint, n5 smallint,sum smallint, maxAbsence smallint)");
         db.execSQL("CREATE TABLE IF NOT EXISTS absence (number smallint, absence smallint)");
     }
 
@@ -34,7 +37,7 @@ public class LotteryDbHelper extends SQLiteOpenHelper {
 
     }
 
-    public void addSscResult(List<Lottery> lotteries) {
+    public void saveSscResult(List<Lottery> lotteries) {
         SQLiteDatabase db = getWritableDatabase();
         db.beginTransaction();
         for (Lottery lottery : lotteries) {
@@ -55,9 +58,32 @@ public class LotteryDbHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void readSscResult() {
+    public List<Lottery> readSscResult() {
         SQLiteDatabase db = getReadableDatabase();
-
+        Cursor cursor = db.rawQuery("select * from ssc", null);
+        List<Lottery> lotteries = new ArrayList<>();
+        while (cursor.moveToNext()) {
+            Lottery lottery = new Lottery();
+            lottery.setTerm(cursor.getLong(0));
+            lottery.setTime(new Date(cursor.getLong(1)));
+            int[] numbers = {cursor.getInt(2), cursor.getInt(3), cursor.getInt(4), cursor.getInt(5), cursor.getInt(6)};
+            lottery.setNumbers(numbers);
+            lottery.setSum(cursor.getInt(7));
+            lottery.setMaxAbence(cursor.getInt(8));
+            lotteries.add(lottery);
+        }
+        cursor.close();
         db.close();
+        return lotteries;
+    }
+
+    public Date readLastResultTime() {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("select max(openTime) from ssc", null);
+        cursor.moveToNext();
+        long time = cursor.getLong(0);
+        cursor.close();
+        db.close();
+        return new Date(time);
     }
 }
