@@ -8,16 +8,17 @@ import java.util.Date;
  */
 
 public class Lottery implements Serializable {
-    private String term = null;
+    private long term = -1;
     private int[] numbers = null;
     private Date time = null;
     private int sum = -1;
+    private int maxAbence = -1;
 
-    public String getTerm() {
+    public long getTerm() {
         return term;
     }
 
-    public void setTerm(String term) {
+    public void setTerm(long term) {
         this.term = term;
     }
 
@@ -43,5 +44,13 @@ public class Lottery implements Serializable {
 
     public void setSum(int sum) {
         this.sum = sum;
+    }
+
+    public int getMaxAbence() {
+        return maxAbence;
+    }
+
+    public void setMaxAbence(int maxAbence) {
+        this.maxAbence = maxAbence;
     }
 }

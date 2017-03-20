@@ -114,7 +114,7 @@ public class SscDaoImpl implements LotteryDao {
                         Date time = dateFormat.parse(result.getString("time").substring(0, 16));
                         if (time.compareTo(lastLottery.getTime()) > 0) {
                             Lottery lottery = new Lottery();
-                            lottery.setTerm(result.getString("expect"));
+                            lottery.setTerm(Long.parseLong(result.getString("expect")));
                             lottery.setTime(time);
                             int[] numbers = toIntArray(result.getString("openCode"));
                             lottery.setNumbers(numbers);
