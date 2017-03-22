@@ -1,10 +1,10 @@
 package com.zf.lottery.dao.impl;
 
 import android.content.Context;
-import android.os.Environment;
 import android.support.annotation.NonNull;
 
 import com.yolanda.nohttp.NoHttp;
+import com.yolanda.nohttp.rest.OnResponseListener;
 import com.yolanda.nohttp.rest.Request;
 import com.yolanda.nohttp.rest.Response;
 import com.yolanda.nohttp.rest.SimpleResponseListener;
@@ -13,12 +13,11 @@ import com.zf.lottery.dao.LotteryDao;
 import com.zf.lottery.dao.LotteryResultsListener;
 import com.zf.lottery.data.Lottery;
 
-import org.apache.commons.io.FileUtils;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
-import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -34,12 +33,15 @@ public class SscDaoImpl implements LotteryDao {
             "&showapi_appid=31607&showapi_sign=a5858af94b274596b7e175634a2ed269";
     private static final int ONE_MINITE = 60 * 1000;
     private static final int MAX_NUM = 100;
+    private static final int MIN_SIZE = 1000;
+    private static final int MAX_SIZE = 11000;
+
     private SimpleDateFormat urlDataFormat = new SimpleDateFormat("yyyy-MM-dd%20HH:mm", Locale.getDefault());
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
 
     private LotteryDbHelper dbHelper = null;
     private List<Lottery> historyLotteries = null;
-    private List<Lottery> lotteries = null;
+    private List<Lottery> lotteries = new ArrayList<>();
 
     public SscDaoImpl(Context context) {
         dbHelper = new LotteryDbHelper(context);
@@ -48,72 +50,96 @@ public class SscDaoImpl implements LotteryDao {
     @Override
     public void obtainLotteryResults(final LotteryResultsListener listener) {
         historyLotteries = dbHelper.readSscResult();
-        String url = String.format(URL_RESULT, urlDataFormat.format(new Date()));
-        requestLotteryResult(listener, url);
+        if (historyLotteries.size() < MIN_SIZE) {
+            String url = String.format(URL_RESULT, urlDataFormat.format(new Date()));
+            requestLotteryResult(listener, url);
+        } else {
+
+        }
     }
 
     private void requestLotteryResult(final LotteryResultsListener listener, String url) {
         Request request = NoHttp.createJsonObjectRequest(url);
-        NoHttpUtils.instance().addRequest(0, request, getResponseListener(listener));
-    }
-
-    @NonNull
-    private SimpleResponseListener<JSONObject> getResponseListener(final LotteryResultsListener listener) {
-        return new SimpleResponseListener<JSONObject>() {
+        OnResponseListener l = new SimpleResponseListener<JSONObject>() {
 
             @Override
             public void onSucceed(int what, Response<JSONObject> response) {
                 try {
-                    JSONObject jsonObject = response.get();
-                    JSONArray resultJsonArray = jsonObject.getJSONObject("showapi_res_body").getJSONArray("result");
-                    int length = resultJsonArray.length();
-                    Lottery lastLottery = historyLotteries.get(0);
-                    for (int i = 0; i < length; i++) {
-                        JSONObject result = resultJsonArray.getJSONObject(i);
-                        Date time = dateFormat.parse(result.getString("time").substring(0, 16));
-                        if (time.compareTo(lastLottery.getTime()) > 0) {
-                            Lottery lottery = new Lottery();
-                            lottery.setTerm(Long.parseLong(result.getString("expect")));
-                            lottery.setTime(time);
-                            int[] numbers = toIntArray(result.getString("openCode"));
-                            lottery.setNumbers(numbers);
-                            lottery.setSum(numbers[3] * 10 + numbers[4]);
-                            lotteries.add(lottery);
-                        } else {
-                            lotteries.addAll(historyLotteries);
-                            dbHelper.saveSscResult(lotteries);
-                            listener.onRequest(lotteries);
-                            return;
-                        }
+                    if (lotteries.size() < MAX_SIZE) {
+                        lotteries.addAll(createLotteries(response));
+                    } else {
+                        dbHelper.saveSscResult(lotteries);
+                        listener.onRequest(dbHelper.readSscResult());
+                        return;
                     }
 
                     if (lotteries.size() % 900 == 0) {
                         Thread.sleep(15000);
                     }
-                    Date date = lotteries.get(lotteries.size() - 1).getTime();
-                    date.setTime(date.getTime() - ONE_MINITE);
-                    String url = String.format(URL_RESULT, urlDataFormat.format(date));
-                    requestLotteryResult(listener, url);
+
+                    requestLotteryResult(listener, createUrl());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         };
+        NoHttpUtils.instance().addRequest(0, request, l);
     }
 
-    public int[] listMaxStat(List<Lottery> lotteries) {
-        int[] notOCcurs = new int[lotteries.size()];
-        int[] occurArray = new int[MAX_NUM];
-        int l = notOCcurs.length - 1;
+    private List<Lottery> createLotteries(Response<JSONObject> response) throws JSONException, ParseException {
+        JSONObject jsonObject = response.get();
+        JSONArray resultJsonArray = jsonObject.getJSONObject("showapi_res_body").getJSONArray("result");
+        int length = resultJsonArray.length();
+        List<Lottery> lotteries = new ArrayList<>();
+        for (int i = 0; i < length; i++) {
+            JSONObject result = resultJsonArray.getJSONObject(i);
+            lotteries.add(createLottery(result));
+        }
+        return lotteries;
+    }
+
+    @NonNull
+    private Lottery createLottery(JSONObject result) throws JSONException, ParseException {
+        Lottery lottery = new Lottery();
+        lottery.setTerm(Long.parseLong(result.getString("expect")));
+        Date time = dateFormat.parse(result.getString("time").substring(0, 16));
+        lottery.setTime(time);
+        int[] numbers = toIntArray(result.getString("openCode"));
+        lottery.setNumbers(numbers);
+        lottery.setSum(numbers[3] * 10 + numbers[4]);
+        return lottery;
+    }
+
+    private String createUrl() {
+        Date date = lotteries.get(lotteries.size() - 1).getTime();
+        date.setTime(date.getTime() - ONE_MINITE);
+        return String.format(URL_RESULT, urlDataFormat.format(date));
+    }
+
+    private void calcMaxAbence(List<Lottery> historyLotteries, List<Lottery> lotteries) {
+        int[] occurArray = calcMaxAbence(historyLotteries);
+        int l = lotteries.size() - 1;
         for (int i = l; i >= 0; i--) {
             Lottery lottery = lotteries.get(i);
             for (int j = 0; j < MAX_NUM; j++) {
                 occurArray[j]++;
             }
             occurArray[lottery.getSum()] = 0;
-            notOCcurs[l - i] = max(occurArray);
+            lotteries.get(i).setMaxAbence(max(occurArray));
         }
-        return notOCcurs;
+    }
+
+    private int[] calcMaxAbence(List<Lottery> lotteries) {
+        int[] occurArray = new int[MAX_NUM];
+        int l = lotteries.size() - 1;
+        for (int i = l; i >= 0; i--) {
+            Lottery lottery = lotteries.get(i);
+            for (int j = 0; j < MAX_NUM; j++) {
+                occurArray[j]++;
+            }
+            occurArray[lottery.getSum()] = 0;
+        }
+        return occurArray;
     }
 
     private int max(int[] input) {

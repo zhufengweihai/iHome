@@ -60,7 +60,7 @@ public class LotteryDbHelper extends SQLiteOpenHelper {
 
     public List<Lottery> readSscResult() {
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery("select * from ssc", null);
+        Cursor cursor = db.rawQuery("select * from ssc order by term desc", null);
         List<Lottery> lotteries = new ArrayList<>();
         while (cursor.moveToNext()) {
             Lottery lottery = new Lottery();
