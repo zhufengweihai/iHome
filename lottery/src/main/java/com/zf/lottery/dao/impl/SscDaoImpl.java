@@ -50,15 +50,15 @@ public class SscDaoImpl implements LotteryDao {
     @Override
     public void obtainLotteryResults(final LotteryResultsListener listener) {
         historyLotteries = dbHelper.readSscResult();
+        String url = String.format(URL_RESULT, urlDataFormat.format(new Date()));
         if (historyLotteries.size() < MIN_SIZE) {
-            String url = String.format(URL_RESULT, urlDataFormat.format(new Date()));
-            requestLotteryResult(listener, url);
+            requestAllLotteryResult(listener, url);
         } else {
-
+            requestLastLotteryResult(listener, url);
         }
     }
 
-    private void requestLotteryResult(final LotteryResultsListener listener, String url) {
+    private void requestAllLotteryResult(final LotteryResultsListener listener, String url) {
         Request request = NoHttp.createJsonObjectRequest(url);
         OnResponseListener l = new SimpleResponseListener<JSONObject>() {
 
@@ -68,8 +68,9 @@ public class SscDaoImpl implements LotteryDao {
                     if (lotteries.size() < MAX_SIZE) {
                         lotteries.addAll(createLotteries(response));
                     } else {
+                        lotteries = addMaxAbence(lotteries);
                         dbHelper.saveSscResult(lotteries);
-                        listener.onRequest(dbHelper.readSscResult());
+                        listener.onRequest(lotteries);
                         return;
                     }
 
@@ -77,13 +78,54 @@ public class SscDaoImpl implements LotteryDao {
                         Thread.sleep(15000);
                     }
 
-                    requestLotteryResult(listener, createUrl());
+                    requestAllLotteryResult(listener, createUrl());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         };
         NoHttpUtils.instance().addRequest(0, request, l);
+    }
+
+    private void requestLastLotteryResult(final LotteryResultsListener listener, String url) {
+        Request request = NoHttp.createJsonObjectRequest(url);
+        final OnResponseListener l = new SimpleResponseListener<JSONObject>() {
+
+            @Override
+            public void onSucceed(int what, Response<JSONObject> response) {
+                try {
+                    if (!addLotteries(response)) {
+                        addMaxAbence(historyLotteries, lotteries);
+                        dbHelper.saveSscResult(lotteries);
+                        lotteries.addAll(historyLotteries);
+                        listener.onRequest(lotteries);
+                        return;
+                    }
+
+                    if (lotteries.size() % 900 == 0) {
+                        Thread.sleep(15000);
+                    }
+
+                    requestLastLotteryResult(listener, createUrl());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        NoHttpUtils.instance().addRequest(0, request, l);
+    }
+
+    private boolean addLotteries(Response<JSONObject> response) throws JSONException, ParseException {
+        List<Lottery> curLotteries = createLotteries(response);
+        Date date = historyLotteries.get(historyLotteries.size() - 1).getTime();
+        for (Lottery lottery : curLotteries) {
+            if (lottery.getTime().after(date)) {
+                lotteries.add(lottery);
+            } else {
+                return false;
+            }
+        }
+        return true;
     }
 
     private List<Lottery> createLotteries(Response<JSONObject> response) throws JSONException, ParseException {
@@ -110,13 +152,22 @@ public class SscDaoImpl implements LotteryDao {
         return lottery;
     }
 
+    private int[] toIntArray(String string) {
+        String[] numberStrings = string.split(",");
+        int[] numbers = new int[numberStrings.length];
+        for (int i = 0; i < numbers.length; i++) {
+            numbers[i] = Integer.parseInt(numberStrings[i]);
+        }
+        return numbers;
+    }
+
     private String createUrl() {
         Date date = lotteries.get(lotteries.size() - 1).getTime();
         date.setTime(date.getTime() - ONE_MINITE);
         return String.format(URL_RESULT, urlDataFormat.format(date));
     }
 
-    private void calcMaxAbence(List<Lottery> historyLotteries, List<Lottery> lotteries) {
+    private void addMaxAbence(List<Lottery> historyLotteries, List<Lottery> lotteries) {
         int[] occurArray = calcMaxAbence(historyLotteries);
         int l = lotteries.size() - 1;
         for (int i = l; i >= 0; i--) {
@@ -127,6 +178,14 @@ public class SscDaoImpl implements LotteryDao {
             occurArray[lottery.getSum()] = 0;
             lotteries.get(i).setMaxAbence(max(occurArray));
         }
+    }
+
+    private List<Lottery> addMaxAbence(List<Lottery> lotteries) {
+        int[] maxAbence = calcMaxAbence(lotteries);
+        for (int i = 0; i < maxAbence.length; i++) {
+            lotteries.get(i).setMaxAbence(maxAbence[i]);
+        }
+        return lotteries.subList(0, MAX_SIZE);
     }
 
     private int[] calcMaxAbence(List<Lottery> lotteries) {
@@ -150,14 +209,5 @@ public class SscDaoImpl implements LotteryDao {
             }
         }
         return max;
-    }
-
-    private int[] toIntArray(String string) {
-        String[] numberStrings = string.split(",");
-        int[] numbers = new int[numberStrings.length];
-        for (int i = 0; i < numbers.length; i++) {
-            numbers[i] = Integer.parseInt(numberStrings[i]);
-        }
-        return numbers;
     }
 }
