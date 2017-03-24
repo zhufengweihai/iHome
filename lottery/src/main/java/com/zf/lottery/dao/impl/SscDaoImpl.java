@@ -185,7 +185,11 @@ public class SscDaoImpl implements LotteryDao {
         for (int i = 0; i < maxAbence.length; i++) {
             lotteries.get(i).setMaxAbence(maxAbence[i]);
         }
-        return lotteries.subList(0, MAX_SIZE);
+        List<Lottery> newList = new ArrayList<>(MAX_SIZE);
+        for (int i = 0; i < MAX_SIZE; i++) {
+            newList.add(lotteries.get(i));
+        }
+        return newList;
     }
 
     private int[] calcMaxAbence(List<Lottery> lotteries) {
