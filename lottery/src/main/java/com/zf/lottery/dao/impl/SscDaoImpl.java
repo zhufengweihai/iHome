@@ -35,6 +35,7 @@ public class SscDaoImpl implements LotteryDao {
     private static final int MAX_NUM = 100;
     private static final int MIN_SIZE = 1000;
     private static final int MAX_SIZE = 11000;
+    private static final int SIZE = MAX_SIZE - MIN_SIZE;
 
     private SimpleDateFormat urlDataFormat = new SimpleDateFormat("yyyy-MM-dd%20HH:mm", Locale.getDefault());
     private SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
@@ -117,7 +118,7 @@ public class SscDaoImpl implements LotteryDao {
 
     private boolean addLotteries(Response<JSONObject> response) throws JSONException, ParseException {
         List<Lottery> curLotteries = createLotteries(response);
-        Date date = historyLotteries.get(historyLotteries.size() - 1).getTime();
+        Date date = historyLotteries.get(0).getTime();
         for (Lottery lottery : curLotteries) {
             if (lottery.getTime().after(date)) {
                 lotteries.add(lottery);
@@ -185,8 +186,8 @@ public class SscDaoImpl implements LotteryDao {
         for (int i = 0; i < maxAbence.length; i++) {
             lotteries.get(i).setMaxAbence(maxAbence[i]);
         }
-        List<Lottery> newList = new ArrayList<>(MAX_SIZE);
-        for (int i = 0; i < MAX_SIZE; i++) {
+        List<Lottery> newList = new ArrayList<>(SIZE);
+        for (int i = 0; i < SIZE; i++) {
             newList.add(lotteries.get(i));
         }
         return newList;

@@ -1,5 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.zf.lottery">
+          package="com.zf.lottery">
 
     <application
         android:allowBackup="true"
@@ -7,13 +8,17 @@
         android:supportsRtl="true">
         <activity
             android:name=".view.LotteriesActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".view.LotteryLoadingActivity"
             android:theme="@style/LoadingDialogStyle">
         </activity>
         <activity
             android:name=".view.SscActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".view.SscStatActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
     </application>

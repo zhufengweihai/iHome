@@ -2,21 +2,25 @@ package com.zf.lottery.view;
 
 import android.Manifest;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.zf.common.app.BaseActivity;
 import com.zf.common.widget.PagerSlidingTabStrip;
 import com.zf.lottery.R;
-import com.zf.lottery.common.Commons;
 import com.zf.lottery.dao.LotteryDao;
 import com.zf.lottery.dao.LotteryResultsListener;
 import com.zf.lottery.dao.impl.SscDaoImpl;
 import com.zf.lottery.data.Lottery;
+import com.zf.lottery.view.SscFragment.SscPagerAdapter;
+import com.zf.lottery.view.help.DataHelper;
 
 import java.util.List;
 
@@ -25,7 +29,6 @@ import permissions.dispatcher.RuntimePermissions;
 
 @RuntimePermissions
 public class SscActivity extends BaseActivity {
-    private List<Lottery> lotteryList = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,8 +60,8 @@ public class SscActivity extends BaseActivity {
                         swipeRefreshLayout.setRefreshing(false);
                         ViewPager viewPager = (ViewPager) findViewById(R.id.sscViewPager);
                         String[] titles = getResources().getStringArray(R.array.ssc);
-                        SscFragment.SscPagerAdapter pagerAdapter = new SscFragment.SscPagerAdapter(getSupportFragmentManager(),
-                                titles, lotteryList);
+                        List<Lottery> lotteries = DataHelper.getInstance().retrieve();
+                        SscPagerAdapter pagerAdapter = new SscPagerAdapter(getSupportFragmentManager(), titles, lotteries);
                         viewPager.setAdapter(pagerAdapter);
                         PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) findViewById(R.id.sscPagerTab);
                         tabs.setViewPager(viewPager);
@@ -72,34 +75,37 @@ public class SscActivity extends BaseActivity {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                new Thread(new Runnable() {
+                AsyncTask.execute(new Runnable() {
                     @Override
                     public void run() {
                         LotteryDao lotteryDao = new SscDaoImpl(SscActivity.this);
                         lotteryDao.obtainLotteryResults(new LotteryResultsListener() {
                             @Override
                             public void onRequest(List<Lottery> lotteries) {
-                                lotteryList = lotteries;
+                                DataHelper.getInstance().save(lotteries);
                                 handler.sendEmptyMessage(1);
                             }
                         });
                     }
-                }).start();
+                });
             }
         });
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        List<Lottery> lotteries = (List<Lottery>) data.getSerializableExtra(Commons.RETURN_VALUE_LOTTERY_RESULT);
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_lottery, menu);
+        return true;
+    }
 
-        ViewPager viewPager = (ViewPager) findViewById(R.id.sscViewPager);
-        String[] titles = getResources().getStringArray(R.array.ssc);
-        SscFragment.SscPagerAdapter pagerAdapter = new SscFragment.SscPagerAdapter(getSupportFragmentManager(),
-                titles, lotteries);
-        viewPager.setAdapter(pagerAdapter);
-        PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) findViewById(R.id.sscPagerTab);
-        tabs.setViewPager(viewPager);
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_stat) {
+            startActivity(new Intent(this, SscStatActivity.class));
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

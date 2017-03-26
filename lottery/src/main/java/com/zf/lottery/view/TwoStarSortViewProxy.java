@@ -20,6 +20,7 @@ import com.zf.lottery.service.impl.SscStatServiceImpl;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by Administrator on 2017/3/7 0007.
@@ -35,14 +36,15 @@ public class TwoStarSortViewProxy {
         final List<StatData> statDatas = new ArrayList<>();
         for (int i = 0; i < notOCcurArray.length / 2; i++) {
             TwoStarStatData statData = new TwoStarStatData();
-            statData.setPair1(String.valueOf(i));
+            statData.setPair1(String.format(Locale.getDefault(), "%02d", i));
             statData.setNotOccurCount1(notOCcurArray[i].get(0));
             int pair2 = (i % 10) * 10 + i / 10;
             if (pair2 != i) {
-                statData.setPair2(String.valueOf(pair2));
+                statData.setPair2(String.format(Locale.getDefault(), "%02d", pair2));
                 statData.setNotOccurCount1(notOCcurArray[pair2].get(0));
             }
             statData.setTotalNotOccurCount(statData.getNotOccurCount1() + statData.getNotOccurCount2());
+            statDatas.add(statData);
         }
         Collections.sort(statDatas, new TowStarStatDataComparator());
         final TowStarStatListAdapter statListAdapter = new TowStarStatListAdapter(statDatas);

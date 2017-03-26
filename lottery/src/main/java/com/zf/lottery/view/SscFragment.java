@@ -36,7 +36,7 @@ public class SscFragment extends Fragment {
         } else if (positon == 1) {
             return new SscResultViewProxy(inflater, container, lotteries).getView();
         } else if (positon == 2) {
-            return new SscStatViewProxy(inflater, container, lotteries).getView();
+           // return new SscStatViewProxy(inflater, container, lotteries).getView();
         } else if (positon == 3) {
 
         } else {

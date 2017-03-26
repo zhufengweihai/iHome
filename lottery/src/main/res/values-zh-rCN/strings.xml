@@ -7,6 +7,6 @@
     <string-array name="ssc">
         <item>组选排序</item>
         <item>近期开奖</item>
-        <item>数据统计</item>
+        <!--item>数据统计</item!-->
     </string-array>
 </resources>
