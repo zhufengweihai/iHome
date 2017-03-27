@@ -13,6 +13,7 @@ public class Lottery implements Serializable {
     private Date time = null;
     private int sum = -1;
     private int maxAbence = -1;
+    private int[] absences = null;
 
     public long getTerm() {
         return term;
@@ -52,5 +53,13 @@ public class Lottery implements Serializable {
 
     public void setMaxAbence(int maxAbence) {
         this.maxAbence = maxAbence;
+    }
+
+    public int[] getAbsences() {
+        return absences;
+    }
+
+    public void setAbsences(int[] absences) {
+        this.absences = absences;
     }
 }

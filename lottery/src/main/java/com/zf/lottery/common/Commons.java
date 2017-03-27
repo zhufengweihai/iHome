@@ -9,4 +9,5 @@ public interface Commons {
     int REQUEST_CODE_LOTTERY_RESULT = 0;
     String RETURN_VALUE_LOTTERY_RESULT = "lottery_result";
     String EXTRA_LOTTERY = "lottery";
+    int MSG_HANDLER_EMPTY = 0;
 }
