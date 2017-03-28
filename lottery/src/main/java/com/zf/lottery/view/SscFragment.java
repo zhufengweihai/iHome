@@ -36,7 +36,7 @@ public class SscFragment extends Fragment {
         } else if (positon == 1) {
             return new SscResultViewProxy(inflater, container, lotteries).getView();
         } else if (positon == 2) {
-           // return new SscStatViewProxy(inflater, container, lotteries).getView();
+            // return new SscStatViewProxy(inflater, container, lotteries).getView();
         } else if (positon == 3) {
 
         } else {
@@ -46,20 +46,23 @@ public class SscFragment extends Fragment {
         return inflater.inflate(R.layout.view_2_sort, container, false);
     }
 
-
     public static class SscPagerAdapter extends FragmentPagerAdapter {
         private String[] titles = null;
         private List<Lottery> lotteries = null;
+        private Fragment[] fragments = null;
 
         public SscPagerAdapter(FragmentManager fm, String[] titles, List<Lottery> lotteries) {
             super(fm);
             this.titles = titles;
             this.lotteries = lotteries;
+            fragments = new Fragment[getCount()];
         }
 
         @Override
         public Fragment getItem(int position) {
-            return SscFragment.newInstance(position, lotteries);
+            SscFragment fragment = SscFragment.newInstance(position, lotteries);
+            fragments[position] = fragment;
+            return fragment;
         }
 
         @Override
@@ -70,6 +73,11 @@ public class SscFragment extends Fragment {
         @Override
         public CharSequence getPageTitle(int position) {
             return titles[position];
+        }
+
+        public void updateData() {
+            for (Fragment fragment : fragments) {
+            }
         }
     }
 }

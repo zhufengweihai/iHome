@@ -16,12 +16,8 @@ import android.view.MenuItem;
 import com.zf.common.app.BaseActivity;
 import com.zf.common.widget.PagerSlidingTabStrip;
 import com.zf.lottery.R;
-import com.zf.lottery.data.Lottery;
 import com.zf.lottery.service.SscService;
 import com.zf.lottery.view.SscFragment.SscPagerAdapter;
-import com.zf.lottery.view.help.DataHelper;
-
-import java.util.List;
 
 import permissions.dispatcher.NeedsPermission;
 import permissions.dispatcher.RuntimePermissions;
@@ -46,9 +42,15 @@ public class SscActivity extends BaseActivity {
         final SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeLayout);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
         swipeRefreshLayout.setSize(SwipeRefreshLayout.LARGE);
-        ;
         swipeRefreshLayout.setProgressBackgroundColorSchemeResource(R.color.textColor);
         swipeRefreshLayout.setProgressViewEndTarget(true, 100);
+
+        ViewPager viewPager = (ViewPager) findViewById(R.id.sscViewPager);
+        String[] titles = getResources().getStringArray(R.array.ssc);
+        final SscPagerAdapter pagerAdapter = new SscPagerAdapter(getSupportFragmentManager(), titles,null);
+        viewPager.setAdapter(pagerAdapter);
+        PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) findViewById(R.id.sscPagerTab);
+        tabs.setViewPager(viewPager);
 
         final Handler handler = new Handler() {
             @Override
@@ -57,14 +59,7 @@ public class SscActivity extends BaseActivity {
                 switch (msg.what) {
                     case 1:
                         swipeRefreshLayout.setRefreshing(false);
-                        ViewPager viewPager = (ViewPager) findViewById(R.id.sscViewPager);
-                        String[] titles = getResources().getStringArray(R.array.ssc);
-                        List<Lottery> lotteries = DataHelper.getInstance().retrieve();
-                        SscPagerAdapter pagerAdapter = new SscPagerAdapter(getSupportFragmentManager(), titles,
-                                lotteries);
-                        viewPager.setAdapter(pagerAdapter);
-                        PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) findViewById(R.id.sscPagerTab);
-                        tabs.setViewPager(viewPager);
+
                         break;
                     default:
                         break;
