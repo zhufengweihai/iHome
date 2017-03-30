@@ -19,6 +19,8 @@ import com.zf.lottery.R;
 import com.zf.lottery.service.SscService;
 import com.zf.lottery.view.SscFragment.SscPagerAdapter;
 
+import de.codecrafters.tableview.TableView;
+import de.codecrafters.tableview.toolkit.SimpleTableDataAdapter;
 import permissions.dispatcher.NeedsPermission;
 import permissions.dispatcher.RuntimePermissions;
 
@@ -28,13 +30,20 @@ public class SscActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ssc);
+        setContentView(R.layout.activity_cqssc);
         Toolbar toolbar = (Toolbar) findViewById(R.id.sscToolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("时时彩");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        PermissionsDispatcher.loadingWithCheck(this);
+        String[][] dataToShow = {{"---", "---", "---", "---"}, {"and", "a", "second", "test"}};
+        TableView<String[]> tableView = (TableView<String[]>) findViewById(R.id.resultTable);
+        tableView.setDataAdapter(new SimpleTableDataAdapter(this, dataToShow));
+
+        String[][] dataToShow1 = {{"that", "is", "a", "test"}, {"  ", "  ", "  ", "  "}};
+        TableView<String[]> tableViewq = (TableView<String[]>) findViewById(R.id.absenceTable);
+        tableViewq.setDataAdapter(new SimpleTableDataAdapter(this, dataToShow1));
+        //PermissionsDispatcher.loadingWithCheck(this);
     }
 
     @NeedsPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
@@ -47,7 +56,7 @@ public class SscActivity extends BaseActivity {
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.sscViewPager);
         String[] titles = getResources().getStringArray(R.array.ssc);
-        final SscPagerAdapter pagerAdapter = new SscPagerAdapter(getSupportFragmentManager(), titles,null);
+        final SscPagerAdapter pagerAdapter = new SscPagerAdapter(getSupportFragmentManager(), titles, null);
         viewPager.setAdapter(pagerAdapter);
         PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) findViewById(R.id.sscPagerTab);
         tabs.setViewPager(viewPager);

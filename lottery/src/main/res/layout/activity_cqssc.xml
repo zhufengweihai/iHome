@@ -21,32 +21,21 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swipeLayout"
+    <com.zf.lottery.view.PullDownView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <com.zf.lottery.view.PullDownView
+        <de.codecrafters.tableview.TableView
+            android:id="@+id/resultTable"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            app:tableView_columnCount="4"/>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <android.support.v7.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/colorForeground"/>
-
-                <android.support.v7.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/colorForeground"/>
-            </RelativeLayout>
-        </com.zf.lottery.view.PullDownView>
-
-    </android.support.v4.widget.SwipeRefreshLayout>
+        <de.codecrafters.tableview.TableView
+            android:id="@+id/absenceTable"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:tableView_columnCount="4"/>
+    </com.zf.lottery.view.PullDownView>
 </android.support.design.widget.CoordinatorLayout>
