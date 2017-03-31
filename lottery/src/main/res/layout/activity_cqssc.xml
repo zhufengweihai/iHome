@@ -21,21 +21,10 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <com.zf.lottery.view.PullDownView
+    <de.codecrafters.tableview.TableView
+        android:id="@+id/resultTable"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <de.codecrafters.tableview.TableView
-            android:id="@+id/resultTable"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:tableView_columnCount="4"/>
-
-        <de.codecrafters.tableview.TableView
-            android:id="@+id/absenceTable"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:tableView_columnCount="4"/>
-    </com.zf.lottery.view.PullDownView>
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:tableView_columnCount="4"/>
 </android.support.design.widget.CoordinatorLayout>
