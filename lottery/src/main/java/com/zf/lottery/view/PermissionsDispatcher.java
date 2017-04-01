@@ -3,9 +3,6 @@ package com.zf.lottery.view;
 
 import android.support.v4.app.ActivityCompat;
 
-import java.lang.ref.WeakReference;
-
-import permissions.dispatcher.PermissionRequest;
 import permissions.dispatcher.PermissionUtils;
 
 class PermissionsDispatcher {
@@ -15,9 +12,9 @@ class PermissionsDispatcher {
     private PermissionsDispatcher() {
     }
 
-    public static void loadingWithCheck(SscActivity target) {
+    public static void requestDataWithCheck(SscActivity target) {
         if (PermissionUtils.hasSelfPermissions(target, PERMISSION_EXTERNAL_STORAGE)) {
-            target.loading();
+            target.requestData();
         } else {
             if (PermissionUtils.shouldShowRequestPermissionRationale(target, PERMISSION_EXTERNAL_STORAGE)) {
 
@@ -36,7 +33,7 @@ class PermissionsDispatcher {
                     return;
                 }
                 if (PermissionUtils.verifyPermissions(grantResults)) {
-                    target.loading();
+                    target.requestData();
                 } else {
                     if (!PermissionUtils.shouldShowRequestPermissionRationale(target, PERMISSION_EXTERNAL_STORAGE)) {
                     } else {

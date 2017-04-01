@@ -3,8 +3,15 @@
       xmlns:tools="http://schemas.android.com/tools"
       tools:context=".lottery.LotteryActivity">
     <item
-        android:id="@+id/action_stat"
+        android:id="@+id/action_result"
+        android:icon="@drawable/ic_result"
         android:orderInCategory="100"
-        android:title="数据统计"
-        app:showAsAction="collapseActionView"/>
+        android:title="结果"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/action_stat"
+        android:icon="@drawable/ic_stat"
+        android:orderInCategory="200"
+        android:title="统计"
+        app:showAsAction="always"/>
 </menu>

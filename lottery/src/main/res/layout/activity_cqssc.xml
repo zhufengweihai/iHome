@@ -22,9 +22,9 @@
     </android.support.design.widget.AppBarLayout>
 
     <de.codecrafters.tableview.TableView
-        android:id="@+id/resultTable"
+        android:id="@+id/absenceTable"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        app:tableView_columnCount="4"/>
+        app:tableView_columnCount="5"/>
 </android.support.design.widget.CoordinatorLayout>

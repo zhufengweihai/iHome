@@ -50,6 +50,13 @@ public class SscService implements LotteryResultsListener {
         if (this.lotteries.size() < MAX_SIZE) {
             this.lotteries.addAll(lotteries);
             Date date = lotteries.get(lotteries.size() - 1).getTime();
+            if (this.lotteries.size() % 900 == 0) {
+                try {
+                    Thread.sleep(15000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
             requestHandler.requestLottery(new Date(date.getTime() - ONE_MINITE), this);
         } else {
             calcAbence();

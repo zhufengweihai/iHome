@@ -2,30 +2,34 @@ package com.zf.lottery.view;
 
 import android.Manifest;
 import android.content.Intent;
-import android.os.AsyncTask;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.view.ViewPager;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.zf.common.app.BaseActivity;
-import com.zf.common.widget.PagerSlidingTabStrip;
 import com.zf.lottery.R;
+import com.zf.lottery.common.Commons;
+import com.zf.lottery.data.GroupAbence;
+import com.zf.lottery.data.Lottery;
 import com.zf.lottery.service.SscService;
-import com.zf.lottery.view.SscFragment.SscPagerAdapter;
+import com.zf.lottery.view.help.DataHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import de.codecrafters.tableview.TableView;
-import de.codecrafters.tableview.toolkit.SimpleTableDataAdapter;
+import de.codecrafters.tableview.listeners.SwipeToRefreshListener;
+import de.codecrafters.tableview.toolkit.SimpleTableHeaderAdapter;
 import permissions.dispatcher.NeedsPermission;
 import permissions.dispatcher.RuntimePermissions;
 
 @RuntimePermissions
 public class SscActivity extends BaseActivity {
+    private TableView tableView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,56 +40,56 @@ public class SscActivity extends BaseActivity {
         getSupportActionBar().setTitle("时时彩");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        String[][] dataToShow = {{"---", "---", "---", "---"}, {"and", "a", "second", "test"}};
-        TableView<String[]> tableView = (TableView<String[]>) findViewById(R.id.resultTable);
-        tableView.setDataAdapter(new SimpleTableDataAdapter(this, dataToShow));
-
-        String[][] dataToShow1 = {{"that", "is", "a", "test"}, {"  ", "  ", "  ", "  "}};
-        TableView<String[]> tableViewq = (TableView<String[]>) findViewById(R.id.absenceTable);
-        tableViewq.setDataAdapter(new SimpleTableDataAdapter(this, dataToShow1));
-        //PermissionsDispatcher.loadingWithCheck(this);
+        tableView = (TableView) findViewById(R.id.absenceTable);
+        String[] titles = {"号对1", "未出数", "号对2", "未出数", "未出和"};
+        SimpleTableHeaderAdapter headAdapter = new SimpleTableHeaderAdapter(this, titles);
+        headAdapter.setTypeface(Typeface.NORMAL);
+        headAdapter.setTextSize(15);
+        headAdapter.setTextColor(getResources().getColor(R.color.textColorDark));
+        tableView.setHeaderAdapter(headAdapter);
+        tableView.setHeaderBackground(R.color.colorHead);
+        PermissionsDispatcher.requestDataWithCheck(this);
     }
 
     @NeedsPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
-    public void loading() {
-        final SwipeRefreshLayout swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeLayout);
-        swipeRefreshLayout.setColorSchemeResources(R.color.colorAccent);
-        swipeRefreshLayout.setSize(SwipeRefreshLayout.LARGE);
-        swipeRefreshLayout.setProgressBackgroundColorSchemeResource(R.color.textColor);
-        swipeRefreshLayout.setProgressViewEndTarget(true, 100);
-
-        ViewPager viewPager = (ViewPager) findViewById(R.id.sscViewPager);
-        String[] titles = getResources().getStringArray(R.array.ssc);
-        final SscPagerAdapter pagerAdapter = new SscPagerAdapter(getSupportFragmentManager(), titles, null);
-        viewPager.setAdapter(pagerAdapter);
-        PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) findViewById(R.id.sscPagerTab);
-        tabs.setViewPager(viewPager);
-
+    public void requestData() {
         final Handler handler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
-                switch (msg.what) {
-                    case 1:
-                        swipeRefreshLayout.setRefreshing(false);
+                if (msg.what == Commons.MSG_HANDLER_EMPTY) {
+                    List<Lottery> lotteries = DataHelper.getInstance().retrieve();
+                    int[] absences = lotteries.get(lotteries.size() - 1).getAbsences();
+                    List<GroupAbence> groupAbences = new ArrayList<>();
+                    for (int num = 0; num < absences.length; num++) {
+                        GroupAbence ga = new GroupAbence();
+                        ga.setNum1(num);
+                        ga.setAbsence1(absences[num]);
+                        int num2 = (num % 10) * 10 + num / 10;
+                        if (num != num2) {
+                            ga.setNum2(num2);
+                            ga.setAbsence2(absences[num2]);
+                        }
 
-                        break;
-                    default:
-                        break;
+                        groupAbences.add(ga);
+                    }
+                    AbsenceDataAdapter dataAdapter = new AbsenceDataAdapter(SscActivity.this, groupAbences);
+                    tableView.setDataAdapter(dataAdapter);
                 }
             }
         };
 
-        swipeRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+        tableView.setSwipeToRefreshEnabled(true);
+        tableView.setSwipeToRefreshListener(new SwipeToRefreshListener() {
             @Override
-            public void onRefresh() {
-                AsyncTask.execute(new Runnable() {
+            public void onRefresh(final RefreshIndicator refreshIndicator) {
+                tableView.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         SscService sscService = new SscService(SscActivity.this, handler);
                         sscService.requestLottery();
                     }
-                });
+                }, 500);
             }
         });
     }
