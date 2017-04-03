@@ -1,6 +1,7 @@
 package com.zf.lottery.data;
 
 import java.io.Serializable;
+import java.util.Comparator;
 import java.util.Date;
 
 /**
@@ -14,6 +15,7 @@ public class Lottery implements Serializable {
     private int sum = -1;
     private int maxAbence = -1;
     private int[] absences = null;
+    private int maxAbences = -1;
 
     public long getTerm() {
         return term;
@@ -61,5 +63,23 @@ public class Lottery implements Serializable {
 
     public void setAbsences(int[] absences) {
         this.absences = absences;
+    }
+
+    public int getMaxAbences() {
+        return maxAbences;
+    }
+
+    public void setMaxAbences(int maxAbences) {
+        this.maxAbences = maxAbences;
+    }
+
+    public static class LotteryComparator implements Comparator<Lottery> {
+
+        @Override
+        public int compare(Lottery o1, Lottery o2) {
+            if (o1.getMaxAbence() < o2.getMaxAbence()) return -1;
+            if (o1.getMaxAbence() > o2.getMaxAbence()) return 1;
+            return 0;
+        }
     }
 }

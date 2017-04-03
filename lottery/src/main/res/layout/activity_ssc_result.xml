@@ -5,7 +5,7 @@
                                                  android:layout_width="match_parent"
                                                  android:layout_height="match_parent"
                                                  android:fitsSystemWindows="true"
-                                                 tools:context=".view.SscActivity">
+                                                 tools:context=".view.SscResultActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -21,10 +21,10 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <de.codecrafters.tableview.SortableTableView
-        android:id="@+id/absenceTable"
+    <de.codecrafters.tableview.TableView
+        android:id="@+id/resultTable"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        app:tableView_columnCount="5"/>
+        app:tableView_columnCount="3"/>
 </android.support.design.widget.CoordinatorLayout>

@@ -4,12 +4,11 @@ package com.zf.lottery.data;
  * Created by zhufeng7 on 2017-4-1.
  */
 
-public class GroupAbence {
+public class Abence {
     private int num1 = 0;
     private int absence1 = 0;
     private int num2 = 0;
     private int absence2 = 0;
-    private int totalAbence = 0;
 
     public int getNum1() {
         return num1;
@@ -47,16 +46,12 @@ public class GroupAbence {
         return absence1 + absence2;
     }
 
-    public void setTotalAbence(int totalAbence) {
-        this.totalAbence = totalAbence;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        GroupAbence that = (GroupAbence) o;
+        Abence that = (Abence) o;
 
         return num1 == that.num1 || num1 == that.num2;
     }

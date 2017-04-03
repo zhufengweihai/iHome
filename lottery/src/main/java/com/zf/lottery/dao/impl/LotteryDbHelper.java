@@ -26,10 +26,8 @@ public class LotteryDbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE IF NOT EXISTS ssc (term INTEGER primary key, openTime INTEGER, n1 smallint, " + "n2 " +
-                "" + "" + "" + "" + "" + "" + "smallint, n3 smallint, n4 smallint, n5 smallint,sum smallint, " +
-                "maxAbsence " + "smallint)");
-        db.execSQL("CREATE TABLE IF NOT EXISTS absence (number smallint, absence smallint)");
+        db.execSQL("CREATE TABLE IF NOT EXISTS ssc (term INTEGER primary key, openTime INTEGER, n1 smallint, "
+                + "n2 smallint, n3 smallint, n4 smallint, n5 smallint,sum smallint)");
     }
 
     @Override
@@ -44,16 +42,14 @@ public class LotteryDbHelper extends SQLiteOpenHelper {
             for (Lottery lottery : lotteries) {
                 int[] numbers = lottery.getNumbers();
                 Object[] bindArgs = {lottery.getTerm(), lottery.getTime().getTime(), numbers[0], numbers[1],
-                        numbers[2], numbers[3], numbers[4], lottery.getSum(), lottery.getMaxAbence()};
-                db.execSQL("insert into ssc(term,openTime,n1,n2,n3,n4,n5,sum,maxAbsence) values(?,?,?,?,?,?,?,?,?)",
-                        bindArgs);
+                        numbers[2], numbers[3], numbers[4], lottery.getSum()};
+                db.execSQL("insert into ssc(term,openTime,n1,n2,n3,n4,n5,sum) values(?,?,?,?,?,?,?,?)", bindArgs);
             }
             db.setTransactionSuccessful();
         } finally {
             db.endTransaction();
             db.close();
         }
-
     }
 
     public List<Lottery> readSscResult() {
@@ -67,7 +63,6 @@ public class LotteryDbHelper extends SQLiteOpenHelper {
             int[] numbers = {cursor.getInt(2), cursor.getInt(3), cursor.getInt(4), cursor.getInt(5), cursor.getInt(6)};
             lottery.setNumbers(numbers);
             lottery.setSum(cursor.getInt(7));
-            lottery.setMaxAbence(cursor.getInt(8));
             lotteries.add(lottery);
         }
         cursor.close();
@@ -75,13 +70,21 @@ public class LotteryDbHelper extends SQLiteOpenHelper {
         return lotteries;
     }
 
-    public Date readLastResultTime() {
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery("select max(openTime) from ssc", null);
-        cursor.moveToNext();
-        long time = cursor.getLong(0);
-        cursor.close();
-        db.close();
-        return new Date(time);
+    public void deleteOldAndSaveNewResult(List<Lottery> lotteries) {
+        SQLiteDatabase db = getWritableDatabase();
+        try {
+            db.beginTransaction();
+            for (Lottery lottery : lotteries) {
+                int[] numbers = lottery.getNumbers();
+                Object[] bindArgs = {lottery.getTerm(), lottery.getTime().getTime(), numbers[0], numbers[1],
+                        numbers[2], numbers[3], numbers[4], lottery.getSum()};
+                db.execSQL("insert into ssc(term,openTime,n1,n2,n3,n4,n5,sum) values(?,?,?,?,?,?,?,?)", bindArgs);
+            }
+            db.execSQL("delete from ssc where term in(select term from ssc order by term asc limit " + lotteries.size() + ')');
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+            db.close();
+        }
     }
 }

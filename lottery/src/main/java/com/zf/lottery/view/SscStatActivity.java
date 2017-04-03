@@ -17,6 +17,7 @@ import lecho.lib.hellocharts.model.Axis;
 import lecho.lib.hellocharts.model.Line;
 import lecho.lib.hellocharts.model.LineChartData;
 import lecho.lib.hellocharts.model.PointValue;
+import lecho.lib.hellocharts.model.ValueShape;
 import lecho.lib.hellocharts.util.ChartUtils;
 import lecho.lib.hellocharts.view.LineChartView;
 
@@ -26,35 +27,37 @@ public class SscStatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ssc_stat);
+
         List<Lottery> lotteries = DataHelper.getInstance().retrieve();
-
         LineChartView chartView = (LineChartView) findViewById(R.id.chart);
-
-        LineChartData data = createData(lotteries);
-        chartView.setLineChartData(data);
-        chartView.setZoomEnabled(true);
-        chartView.setScrollEnabled(false);
-        chartView.setZoomType(ZoomType.HORIZONTAL);
-    }
-
-    private LineChartData createData(List<Lottery> lotteries) {
-        LotteryStatService statService = new SscStatServiceImpl();
-        int[] notOCcurs = statService.listMaxStat(lotteries);
-        List<PointValue> values = new ArrayList<PointValue>();
-        for (int i = 0; i < 10000; ++i) {
-            values.add(new PointValue(i, notOCcurs[notOCcurs.length - 10000 + i]));
+        List<Line> lines = new ArrayList<>();
+        List<PointValue> values = new ArrayList<>();
+        for (int i = 5000; i >= 0; i--) {
+            values.add(new PointValue(5000 - i, lotteries.get(i).getMaxAbence()));
         }
 
         Line line = new Line(values);
-        line.setColor(ChartUtils.COLOR_GREEN);
+        line.setColor(ChartUtils.COLORS[0]);
+        line.setShape(ValueShape.CIRCLE);
+        line.setCubic(false);
+        line.setFilled(false);
+        line.setHasLabels(false);
+        line.setHasLabelsOnlyForSelected(false);
+        line.setHasLines(true);
         line.setHasPoints(false);
-
-        List<Line> lines = new ArrayList<Line>();
         lines.add(line);
 
+
         LineChartData data = new LineChartData(lines);
-        data.setAxisXBottom(new Axis());
-        data.setAxisYLeft(new Axis().setHasLines(true));
-        return data;
+
+        Axis axisX = new Axis();
+        Axis axisY = new Axis().setHasLines(true);
+        data.setAxisXBottom(axisX);
+        data.setAxisYLeft(axisY);
+
+        data.setBaseValue(Float.NEGATIVE_INFINITY);
+        chartView.setLineChartData(data);
+        chartView.setZoomType(ZoomType.HORIZONTAL);
     }
+
 }

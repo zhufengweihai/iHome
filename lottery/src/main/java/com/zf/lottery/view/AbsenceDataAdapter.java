@@ -5,7 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.zf.lottery.data.GroupAbence;
+import com.zf.lottery.data.Abence;
 
 import java.util.List;
 import java.util.Locale;
@@ -16,15 +16,15 @@ import de.codecrafters.tableview.TableDataAdapter;
  * Created by zhufeng7 on 2017-4-1.
  */
 
-public class AbsenceDataAdapter extends TableDataAdapter<GroupAbence> {
-    public AbsenceDataAdapter(Context context, List<GroupAbence> data) {
+public class AbsenceDataAdapter extends TableDataAdapter<Abence> {
+    public AbsenceDataAdapter(Context context, List<Abence> data) {
         super(context, data);
     }
 
     @Override
     public View getCellView(int rowIndex, int columnIndex, ViewGroup parentView) {
         final TextView textView = new TextView(getContext());
-        GroupAbence ga = getRowData(rowIndex);
+        Abence ga = getRowData(rowIndex);
         String text = null;
         switch (columnIndex) {
             case 0:
