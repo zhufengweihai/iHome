@@ -4,11 +4,19 @@ import android.content.Context;
 
 import com.zf.lottery.dao.LotteryResultsListener;
 import com.zf.lottery.dao.impl.LotteryDbHelper;
+import com.zf.lottery.data.Absence;
 import com.zf.lottery.data.Lottery;
 
+import org.apache.commons.io.CopyUtils;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.ObjectUtils;
+
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import static com.zf.lottery.service.impl.SscStatServiceImpl.MAX_NUM;
 
@@ -89,16 +97,29 @@ public class SscService implements LotteryResultsListener {
     }
 
     private void calcAbence() {
-        int[] absences = new int[MAX_NUM];
+        List<Absence> abenceList = new ArrayList<>(MAX_NUM);
+        for (int m = 0; m < 10; m++) {
+            for (int n = 0; n < 10; n++) {
+                abenceList.add(new Absence(m, n));
+            }
+        }
         int l = lotteries.size() - 1;
         for (int i = l; i >= 0; i--) {
+
             Lottery lottery = lotteries.get(i);
-            for (int j = 0; j < MAX_NUM; j++) {
-                absences[j]++;
+            for (int m = 0; m < 10; m++) {
+                for (int n = 0; n < 10; n++) {
+                    abenceList.get(m * 10 + n).increaseAbsence();
+                }
             }
-            absences[lottery.getSum()] = 0;
-            lottery.setAbsences(absences.clone());
-            lottery.setMaxAbence(max(lottery.getAbsences()));
+            int[] numbers = lottery.getNumbers();
+            abenceList.get(numbers[3] * 10 + numbers[4]).setAbsence(0);
+
+            List<Absence> absences = new ArrayList<>(MAX_NUM);
+            for (Absence absence : abenceList) {
+                absences.add(new Absence(absence));
+            }
+            lottery.setAbsences(absences);
         }
     }
 

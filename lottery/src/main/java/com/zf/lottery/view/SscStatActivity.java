@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.zf.lottery.R;
 import com.zf.lottery.data.Lottery;
 import com.zf.lottery.service.LotteryStatService;
+import com.zf.lottery.service.SscStatService;
 import com.zf.lottery.service.impl.SscStatServiceImpl;
 import com.zf.lottery.view.help.DataHelper;
 
@@ -29,11 +30,14 @@ public class SscStatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_ssc_stat);
 
         List<Lottery> lotteries = DataHelper.getInstance().retrieve();
+        SscStatService sscStatService = new SscStatService();
+        int[] maxAbences = sscStatService.calcMaxAbence(lotteries);
         LineChartView chartView = (LineChartView) findViewById(R.id.chart);
         List<Line> lines = new ArrayList<>();
         List<PointValue> values = new ArrayList<>();
-        for (int i = 5000; i >= 0; i--) {
-            values.add(new PointValue(5000 - i, lotteries.get(i).getMaxAbence()));
+        int l = maxAbences.length - 1;
+        for (int i = l; i >= 0; i--) {
+            values.add(new PointValue(l - i, maxAbences[i]));
         }
 
         Line line = new Line(values);

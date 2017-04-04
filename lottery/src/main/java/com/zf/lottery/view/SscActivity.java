@@ -10,10 +10,12 @@ import android.view.MenuItem;
 
 import com.zf.common.app.BaseActivity;
 import com.zf.lottery.R;
-import com.zf.lottery.data.Abence;
+import com.zf.lottery.data.Absence;
+import com.zf.lottery.data.GroupAbsence;
 import com.zf.lottery.data.Lottery;
 import com.zf.lottery.service.LotteryResultListener;
 import com.zf.lottery.service.SscService;
+import com.zf.lottery.service.SscStatService;
 import com.zf.lottery.view.help.DataHelper;
 
 import java.util.ArrayList;
@@ -65,21 +67,9 @@ public class SscActivity extends BaseActivity {
                             @Override
                             public void onRequest(List<Lottery> lotteries) {
                                 DataHelper.getInstance().save(lotteries);
-                                int[] absences = lotteries.get(0).getAbsences();
-                                List<Abence> groupAbences = new ArrayList<>();
-                                for (int num = 0; num < absences.length; num++) {
-                                    Abence ga = new Abence();
-                                    ga.setNum1(num);
-                                    ga.setAbsence1(absences[num]);
-                                    int num2 = (num % 10) * 10 + num / 10;
-                                    if (num != num2) {
-                                        ga.setNum2(num2);
-                                        ga.setAbsence2(absences[num2]);
-                                    }
-
-                                    groupAbences.add(ga);
-                                }
-                                AbsenceDataAdapter dataAdapter = new AbsenceDataAdapter(SscActivity.this, groupAbences);
+                                SscStatService sscStatService = new SscStatService();
+                                List<GroupAbsence> groupAbsences = sscStatService.calc2Abence(lotteries.get(0));
+                                AbsenceDataAdapter dataAdapter = new AbsenceDataAdapter(SscActivity.this, groupAbsences);
                                 tableView.setDataAdapter(dataAdapter);
 
                                 refreshIndicator.hide();
