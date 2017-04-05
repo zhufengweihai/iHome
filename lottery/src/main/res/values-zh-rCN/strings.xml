@@ -9,4 +9,8 @@
         <item>近期开奖</item>
         <!--item>数据统计</item!-->
     </string-array>
+    <string-array name="stat_type">
+        <item>组选</item>
+        <item>直选</item>
+    </string-array>
 </resources>

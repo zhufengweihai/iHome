@@ -10,7 +10,6 @@ import android.view.MenuItem;
 
 import com.zf.common.app.BaseActivity;
 import com.zf.lottery.R;
-import com.zf.lottery.data.Absence;
 import com.zf.lottery.data.GroupAbsence;
 import com.zf.lottery.data.Lottery;
 import com.zf.lottery.service.LotteryResultListener;
@@ -18,7 +17,6 @@ import com.zf.lottery.service.SscService;
 import com.zf.lottery.service.SscStatService;
 import com.zf.lottery.view.help.DataHelper;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import de.codecrafters.tableview.SortableTableView;
@@ -50,7 +48,8 @@ public class SscActivity extends BaseActivity {
         tableView.setHeaderAdapter(headAdapter);
         tableView.setHeaderBackground(R.color.colorHead);
         tableView.setHeaderSortStateViewProvider(SortStateViewProviders.brightArrows());
-        tableView.setColumnComparator(4, new Lottery.LotteryComparator());
+        tableView.setColumnComparator(4, new GroupAbsence.GroupAbsenceComparator());
+        tableView.sort(4, false);
         PermissionsDispatcher.requestDataWithCheck(this);
     }
 
@@ -68,8 +67,9 @@ public class SscActivity extends BaseActivity {
                             public void onRequest(List<Lottery> lotteries) {
                                 DataHelper.getInstance().save(lotteries);
                                 SscStatService sscStatService = new SscStatService();
-                                List<GroupAbsence> groupAbsences = sscStatService.calc2Abence(lotteries.get(0));
-                                AbsenceDataAdapter dataAdapter = new AbsenceDataAdapter(SscActivity.this, groupAbsences);
+                                List<GroupAbsence> groupAbsences = sscStatService.calcGroupAbence(lotteries.get(0));
+                                AbsenceDataAdapter dataAdapter = new AbsenceDataAdapter(SscActivity.this,
+                                        groupAbsences);
                                 tableView.setDataAdapter(dataAdapter);
 
                                 refreshIndicator.hide();

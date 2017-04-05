@@ -51,25 +51,6 @@ public class Absence implements Comparable<Absence> {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Absence absence = (Absence) o;
-
-        if (n1 != absence.n1) return false;
-        return n2 == absence.n2;
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = n1;
-        result = 31 * result + n2;
-        return result;
-    }
-
-    @Override
     public int compareTo(@NonNull Absence o) {
         if (absence > o.absence) {
             return 1;

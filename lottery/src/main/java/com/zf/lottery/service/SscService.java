@@ -7,16 +7,9 @@ import com.zf.lottery.dao.impl.LotteryDbHelper;
 import com.zf.lottery.data.Absence;
 import com.zf.lottery.data.Lottery;
 
-import org.apache.commons.io.CopyUtils;
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.ObjectUtils;
-
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 
 import static com.zf.lottery.service.impl.SscStatServiceImpl.MAX_NUM;
 
@@ -129,15 +122,5 @@ public class SscService implements LotteryResultsListener {
             newList.add(lotteries.get(i));
         }
         lotteries = newList;
-    }
-
-    private int max(int[] input) {
-        int max = Integer.MIN_VALUE;
-        for (int i = 0; i < input.length; i++) {
-            if (max < input[i]) {
-                max = input[i];
-            }
-        }
-        return max;
     }
 }

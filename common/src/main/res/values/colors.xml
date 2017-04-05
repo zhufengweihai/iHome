@@ -20,6 +20,6 @@
     <color name="textColorTitle">@android:color/white</color>
     <color name="textColor">#ff969696</color>
     <color name="textColorDark">#ff555555</color>
-    
+
     <color name="rippelColor">#0099CC</color>
 </resources>

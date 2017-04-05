@@ -2,12 +2,14 @@ package com.zf.lottery.view;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatSpinner;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.AdapterView;
 
 import com.zf.lottery.R;
 import com.zf.lottery.data.Lottery;
-import com.zf.lottery.service.LotteryStatService;
 import com.zf.lottery.service.SscStatService;
-import com.zf.lottery.service.impl.SscStatServiceImpl;
 import com.zf.lottery.view.help.DataHelper;
 
 import java.util.ArrayList;
@@ -22,17 +24,28 @@ import lecho.lib.hellocharts.model.ValueShape;
 import lecho.lib.hellocharts.util.ChartUtils;
 import lecho.lib.hellocharts.view.LineChartView;
 
-public class SscStatActivity extends AppCompatActivity {
+public class SscStatActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ssc_stat);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.sscToolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("数据统计");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        List<Lottery> lotteries = DataHelper.getInstance().retrieve();
-        SscStatService sscStatService = new SscStatService();
-        int[] maxAbences = sscStatService.calcMaxAbence(lotteries);
-        LineChartView chartView = (LineChartView) findViewById(R.id.chart);
+        AppCompatSpinner typeSpinner = (AppCompatSpinner) findViewById(R.id.typeSpinner);
+        typeSpinner.setOnItemSelectedListener(this);
+        typeSpinner.setSelection(0);
+
+//        AppCompatSpinner numberSpinner = (AppCompatSpinner) findViewById(R.id.numberSpinner);
+//        ArrayAdapter<Integer> adapter = new ArrayAdapter<Integer>(this,android.R.layout.simple_spinner_item,aaa);
+//        numberSpinner.setAdapter(adapter);
+    }
+
+    private void initCharView(int[] maxAbences) {
+        LineChartView chartView = (LineChartView) findViewById(R.id.chartView);
         List<Line> lines = new ArrayList<>();
         List<PointValue> values = new ArrayList<>();
         int l = maxAbences.length - 1;
@@ -64,4 +77,21 @@ public class SscStatActivity extends AppCompatActivity {
         chartView.setZoomType(ZoomType.HORIZONTAL);
     }
 
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        List<Lottery> lotteries = DataHelper.getInstance().retrieve();
+        SscStatService sscStatService = new SscStatService();
+        if (position == 0) {
+            int[] maxAbences = sscStatService.calcGroupMaxAbence(lotteries);
+            initCharView(maxAbences);
+        } else if (position == 1) {
+            int[] maxAbences = sscStatService.calcMaxAbence(lotteries);
+            initCharView(maxAbences);
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
 }
