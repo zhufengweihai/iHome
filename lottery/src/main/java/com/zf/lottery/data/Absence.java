@@ -2,6 +2,8 @@ package com.zf.lottery.data;
 
 import android.support.annotation.NonNull;
 
+import java.util.Comparator;
+
 /**
  * Created by zhufeng7 on 2017-4-1.
  */
@@ -58,5 +60,19 @@ public class Absence implements Comparable<Absence> {
             return -1;
         }
         return 0;
+    }
+
+    public static class DoubleNumberComparator implements Comparator<Absence> {
+
+        @Override
+        public int compare(Absence o1, Absence o2) {
+            if (o1.n1 != o1.n2) {
+                return -1;
+            } else if (o2.n1 != o2.n2) {
+                return 1;
+            } else {
+                return o1.compareTo(o2);
+            }
+        }
     }
 }

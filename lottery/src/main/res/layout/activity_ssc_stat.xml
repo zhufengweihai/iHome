@@ -24,9 +24,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
+                android:entries="@array/stat_number"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
-                app:popupTheme="@android:style/Theme.Holo.Light"/>
+                android:popupBackground="@color/colorForeground"
+                app:popupTheme="@android:style/Theme.Holo"/>
 
             <android.support.v7.widget.AppCompatSpinner
                 android:id="@+id/typeSpinner"
@@ -36,7 +38,8 @@
                 android:entries="@array/stat_type"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
-                app:popupTheme="@android:style/Theme.Holo.Light"/>
+                android:popupBackground="@color/colorForeground"
+                app:popupTheme="@android:style/Theme.Holo"/>
         </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>

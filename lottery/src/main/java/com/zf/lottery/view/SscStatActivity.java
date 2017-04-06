@@ -82,10 +82,16 @@ public class SscStatActivity extends AppCompatActivity implements AdapterView.On
         List<Lottery> lotteries = DataHelper.getInstance().retrieve();
         SscStatService sscStatService = new SscStatService();
         if (position == 0) {
-            int[] maxAbences = sscStatService.calcGroupMaxAbence(lotteries);
+            int[] maxAbences = sscStatService.calcMaxAbence(lotteries);
             initCharView(maxAbences);
         } else if (position == 1) {
-            int[] maxAbences = sscStatService.calcMaxAbence(lotteries);
+            int[] maxAbences = sscStatService.calcGroupMaxAbence(lotteries);
+            initCharView(maxAbences);
+        } else if (position == 2) {
+            int[] maxAbences = sscStatService.calcDoubleNumberMaxAbence(lotteries);
+            initCharView(maxAbences);
+        } else if (position == 3) {
+            int[] maxAbences = sscStatService.calc2NumberNextAbence(lotteries);
             initCharView(maxAbences);
         }
     }
