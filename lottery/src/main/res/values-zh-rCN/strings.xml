@@ -9,11 +9,19 @@
         <item>近期开奖</item>
         <!--item>数据统计</item!-->
     </string-array>
+    <string-array name="result_type">
+        <item>直选</item>
+        <item>组选</item>
+        <item>双数</item>
+    </string-array>
     <string-array name="stat_type">
-        <item>二星直选</item>
-        <item>二星组选</item>
-        <item>双数直选</item>
-        <item>TOP2预期</item>
+        <item>直选未出期数</item>
+        <item>组选未出期数</item>
+        <item>双数未出期数</item>
+        <item>TOP2中出期数</item>
+        <item>TOP2中出(500)</item>
+        <item>双数TOP2中出</item>
+        <item>双数TOP2(300)</item>
     </string-array>
     <string-array name="stat_number">
         <item>00</item>

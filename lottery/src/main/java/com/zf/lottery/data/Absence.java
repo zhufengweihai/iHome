@@ -53,6 +53,11 @@ public class Absence implements Comparable<Absence> {
     }
 
     @Override
+    public String toString() {
+        return "Absence{" + "n1=" + n1 + ", n2=" + n2 + ", absence=" + absence + '}';
+    }
+
+    @Override
     public int compareTo(@NonNull Absence o) {
         if (absence > o.absence) {
             return 1;

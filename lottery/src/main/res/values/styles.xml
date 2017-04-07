@@ -19,4 +19,8 @@
         <item name="android:textSize">15sp</item>
         <item name="android:background">@color/colorBackground</item>
     </style>
+
+    <style name="popupTheme" parent="@android:style/Theme.Holo.Light">
+        <item name="android:textColor">@color/textColor</item>
+    </style>
 </resources>

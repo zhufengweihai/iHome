@@ -32,7 +32,7 @@ public class SscStatActivity extends AppCompatActivity implements AdapterView.On
         setContentView(R.layout.activity_ssc_stat);
         Toolbar toolbar = (Toolbar) findViewById(R.id.sscToolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("数据统计");
+        getSupportActionBar().setTitle("统计");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         AppCompatSpinner typeSpinner = (AppCompatSpinner) findViewById(R.id.typeSpinner);
@@ -48,9 +48,8 @@ public class SscStatActivity extends AppCompatActivity implements AdapterView.On
         LineChartView chartView = (LineChartView) findViewById(R.id.chartView);
         List<Line> lines = new ArrayList<>();
         List<PointValue> values = new ArrayList<>();
-        int l = maxAbences.length - 1;
-        for (int i = l; i >= 0; i--) {
-            values.add(new PointValue(l - i, maxAbences[i]));
+        for (int i = 0; i < maxAbences.length; i++) {
+            values.add(new PointValue(i, maxAbences[i]));
         }
 
         Line line = new Line(values);
@@ -92,6 +91,15 @@ public class SscStatActivity extends AppCompatActivity implements AdapterView.On
             initCharView(maxAbences);
         } else if (position == 3) {
             int[] maxAbences = sscStatService.calc2NumberNextAbence(lotteries);
+            initCharView(maxAbences);
+        } else if (position == 4) {
+            int[] maxAbences = sscStatService.calc2Number500NextAbence(lotteries);
+            initCharView(maxAbences);
+        } else if (position == 5) {
+            int[] maxAbences = sscStatService.calc2TwinsNumberNextAbence(lotteries);
+            initCharView(maxAbences);
+        } else if (position == 6) {
+            int[] maxAbences = sscStatService.calc2Twins300NextAbence(lotteries);
             initCharView(maxAbences);
         }
     }

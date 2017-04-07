@@ -4,9 +4,12 @@ import android.Manifest;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v7.widget.AppCompatSpinner;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 
 import com.zf.common.app.BaseActivity;
 import com.zf.lottery.R;
@@ -27,7 +30,7 @@ import permissions.dispatcher.NeedsPermission;
 import permissions.dispatcher.RuntimePermissions;
 
 @RuntimePermissions
-public class SscActivity extends BaseActivity {
+public class SscActivity extends BaseActivity implements AdapterView.OnItemSelectedListener {
     private SortableTableView tableView;
 
     @Override
@@ -38,6 +41,10 @@ public class SscActivity extends BaseActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("时时彩");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        AppCompatSpinner typeSpinner = (AppCompatSpinner) findViewById(R.id.typeSpinner);
+        typeSpinner.setOnItemSelectedListener(this);
+        typeSpinner.setSelection(0);
 
         tableView = (SortableTableView) findViewById(R.id.absenceTable);
         String[] titles = {"号对1", "未出数", "号对2", "未出数", "未出和"};
@@ -101,5 +108,17 @@ public class SscActivity extends BaseActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        if (position == 0) {
+            String[] titles = {"数字", "未出期数"};
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }

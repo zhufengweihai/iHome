@@ -17,7 +17,18 @@
             android:id="@+id/sscToolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@drawable/bg_title"/>
+            android:background="@drawable/bg_title">
+
+            <android.support.v7.widget.AppCompatSpinner
+                android:id="@+id/typeSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:entries="@array/result_type"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                app:popupTheme="@style/popupTheme"/>
+        </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
 
