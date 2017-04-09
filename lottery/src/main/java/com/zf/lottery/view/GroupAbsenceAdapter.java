@@ -17,8 +17,8 @@ import de.codecrafters.tableview.TableDataAdapter;
  * Created by zhufeng7 on 2017-4-1.
  */
 
-public class AbsenceDataAdapter extends TableDataAdapter<GroupAbsence> {
-    public AbsenceDataAdapter(Context context, List<GroupAbsence> data) {
+public class GroupAbsenceAdapter extends TableDataAdapter<GroupAbsence> {
+    public GroupAbsenceAdapter(Context context, List<GroupAbsence> data) {
         super(context, data);
     }
 

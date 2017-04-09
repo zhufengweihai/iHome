@@ -10,8 +10,8 @@
         <!--item>数据统计</item!-->
     </string-array>
     <string-array name="result_type">
-        <item>直选</item>
         <item>组选</item>
+        <item>直选</item>
         <item>双数</item>
     </string-array>
     <string-array name="stat_type">

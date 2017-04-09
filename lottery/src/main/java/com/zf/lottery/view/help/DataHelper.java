@@ -25,6 +25,6 @@ public class DataHelper {
     }
 
     public List<Lottery> retrieve() {
-        return lotteries.get();
+        return lotteries == null ? null : lotteries.get();
     }
 }

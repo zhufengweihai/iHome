@@ -67,6 +67,14 @@ public class Absence implements Comparable<Absence> {
         return 0;
     }
 
+    public static class AbsenceComparator implements Comparator<Absence> {
+
+        @Override
+        public int compare(Absence o1, Absence o2) {
+            return o1.compareTo(o2);
+        }
+    }
+
     public static class DoubleNumberComparator implements Comparator<Absence> {
 
         @Override
