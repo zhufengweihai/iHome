@@ -32,11 +32,25 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <de.codecrafters.tableview.SortableTableView
-        android:id="@+id/absenceTable"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorForeground"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        app:tableView_columnCount="5"/>
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <de.codecrafters.tableview.SortableTableView
+            android:id="@+id/directAbsenceTable"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorForeground"
+            android:visibility="invisible"
+            app:tableView_columnCount="2"/>
+
+        <de.codecrafters.tableview.SortableTableView
+            android:id="@+id/groupAbsenceTable"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorForeground"
+            app:tableView_columnCount="5"/>
+    </FrameLayout>
+
 </android.support.design.widget.CoordinatorLayout>

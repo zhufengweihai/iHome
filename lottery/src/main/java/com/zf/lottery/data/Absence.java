@@ -52,6 +52,10 @@ public class Absence implements Comparable<Absence> {
         this.absence++;
     }
 
+    public boolean isTwins() {
+        return n1 == n2;
+    }
+
     @Override
     public String toString() {
         return "Absence{" + "n1=" + n1 + ", n2=" + n2 + ", absence=" + absence + '}';

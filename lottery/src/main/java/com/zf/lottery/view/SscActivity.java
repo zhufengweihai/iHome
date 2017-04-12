@@ -23,11 +23,13 @@ import com.zf.lottery.service.SscStatService;
 import com.zf.lottery.view.help.AbsenceAdapter;
 import com.zf.lottery.view.help.DataHelper;
 
+import org.apache.commons.lang3.ObjectUtils;
+
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
 import de.codecrafters.tableview.SortableTableView;
-import de.codecrafters.tableview.TableDataAdapter;
 import de.codecrafters.tableview.listeners.SwipeToRefreshListener;
 import de.codecrafters.tableview.toolkit.SimpleTableHeaderAdapter;
 import de.codecrafters.tableview.toolkit.SortStateViewProviders;
@@ -36,7 +38,8 @@ import permissions.dispatcher.RuntimePermissions;
 
 @RuntimePermissions
 public class SscActivity extends BaseActivity implements AdapterView.OnItemSelectedListener {
-    private SortableTableView tableView;
+    private SortableTableView groupTableView;
+    private SortableTableView directTableView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,16 +52,35 @@ public class SscActivity extends BaseActivity implements AdapterView.OnItemSelec
 
         AppCompatSpinner typeSpinner = (AppCompatSpinner) findViewById(R.id.typeSpinner);
         typeSpinner.setOnItemSelectedListener(this);
-        typeSpinner.setSelection(-1);
+        typeSpinner.setSelection(1);
 
-        tableView = (SortableTableView) findViewById(R.id.absenceTable);
-        tableView.setSwipeToRefreshEnabled(true);
+        groupTableView = (SortableTableView) findViewById(R.id.groupAbsenceTable);
+        String[] titles = {"号对1", "未出数", "号对2", "未出数", "未出和"};
+        initTable(groupTableView, titles, new GroupAbsence.GroupAbsenceComparator());
+        groupTableView.setSwipeToRefreshEnabled(true);
+
+        directTableView = (SortableTableView) findViewById(R.id.directAbsenceTable);
+        String[] directTitles = {"数字", "未出期数"};
+        initTable(directTableView, directTitles, new Absence.AbsenceComparator());
+
         PermissionsDispatcher.requestDataWithCheck(this);
+    }
+
+    private void initTable(SortableTableView tableView, String[] titles, Comparator comparator) {
+        SimpleTableHeaderAdapter headAdapter = new SimpleTableHeaderAdapter(this, titles);
+        headAdapter.setTypeface(Typeface.NORMAL);
+        headAdapter.setTextSize(12);
+        headAdapter.setTextColor(getResources().getColor(R.color.textColorDark));
+        tableView.setHeaderAdapter(headAdapter);
+        tableView.setHeaderBackground(R.color.colorHead);
+        tableView.setHeaderSortStateViewProvider(SortStateViewProviders.brightArrows());
+        tableView.setColumnComparator(titles.length - 1, comparator);
+        tableView.sort(titles.length - 1, false);
     }
 
     @NeedsPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
     public void requestData() {
-        tableView.setSwipeToRefreshListener(new SwipeToRefreshListener() {
+        groupTableView.setSwipeToRefreshListener(new SwipeToRefreshListener() {
             @Override
             public void onRefresh(final RefreshIndicator refreshIndicator) {
                 AsyncTask.execute(new Runnable() {
@@ -100,22 +122,6 @@ public class SscActivity extends BaseActivity implements AdapterView.OnItemSelec
         return super.onOptionsItemSelected(item);
     }
 
-    private void updateData(String[] titles, Comparator comparator, TableDataAdapter adapter) {
-        tableView.setColumnCount(titles.length);
-        SimpleTableHeaderAdapter headAdapter = new SimpleTableHeaderAdapter(this, titles);
-        headAdapter.setTypeface(Typeface.NORMAL);
-        headAdapter.setTextSize(12);
-        headAdapter.setTextColor(getResources().getColor(R.color.textColorDark));
-        tableView.setHeaderAdapter(headAdapter);
-        tableView.setHeaderBackground(R.color.colorHead);
-        tableView.setHeaderSortStateViewProvider(SortStateViewProviders.brightArrows());
-        for (int i = 0; i < titles.length; i++) {
-            tableView.setColumnComparator(i, null);
-        }
-        tableView.setColumnComparator(titles.length - 1, comparator);
-        tableView.setDataAdapter(adapter);
-        tableView.sort(titles.length - 1, false);
-    }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -123,17 +129,32 @@ public class SscActivity extends BaseActivity implements AdapterView.OnItemSelec
             return;
         }
         if (position == 0) {
-            String[] titles = {"号对1", "未出数", "号对2", "未出数", "未出和"};
             SscStatService sscStatService = new SscStatService();
             Lottery lottery = DataHelper.getInstance().retrieve().get(0);
             List<GroupAbsence> groupAbsences = sscStatService.calcGroupAbence(lottery);
             GroupAbsenceAdapter dataAdapter = new GroupAbsenceAdapter(SscActivity.this, groupAbsences);
-            updateData(titles, new GroupAbsence.GroupAbsenceComparator(), dataAdapter);
+            groupTableView.setDataAdapter(dataAdapter);
+            groupTableView.setVisibility(View.VISIBLE);
+            directTableView.setVisibility(View.INVISIBLE);
         } else if (position == 1) {
-            String[] titles = {"数字", "未出期数"};
             Lottery lottery = DataHelper.getInstance().retrieve().get(0);
-            AbsenceAdapter dataAdapter = new AbsenceAdapter(SscActivity.this, lottery.getAbsences());
-            updateData(titles, new Absence.AbsenceComparator(), dataAdapter);
+            AbsenceAdapter dataAdapter = new AbsenceAdapter(SscActivity.this, ObjectUtils.clone(lottery.getAbsences()));
+            directTableView.setDataAdapter(dataAdapter);
+            groupTableView.setVisibility(View.INVISIBLE);
+            directTableView.setVisibility(View.VISIBLE);
+        } else if (position == 2) {
+            Lottery lottery = DataHelper.getInstance().retrieve().get(0);
+            List<Absence> absences = lottery.getAbsences();
+            List<Absence> twinsAbsences = new ArrayList<>(10);
+            for (Absence absence : absences) {
+                if (absence.isTwins()) {
+                    twinsAbsences.add(absence);
+                }
+            }
+            AbsenceAdapter dataAdapter = new AbsenceAdapter(SscActivity.this, twinsAbsences);
+            directTableView.setDataAdapter(dataAdapter);
+            groupTableView.setVisibility(View.INVISIBLE);
+            directTableView.setVisibility(View.VISIBLE);
         }
     }
 
