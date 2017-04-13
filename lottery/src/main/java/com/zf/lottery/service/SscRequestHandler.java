@@ -1,5 +1,7 @@
 package com.zf.lottery.service;
 
+import android.util.Log;
+
 import com.yolanda.nohttp.NoHttp;
 import com.yolanda.nohttp.rest.OnResponseListener;
 import com.yolanda.nohttp.rest.Request;
@@ -23,7 +25,7 @@ import java.util.Locale;
  */
 
 public class SscRequestHandler {
-    private static final String URL_RESULT = "https://route.showapi.com/44-2?code=cqssc&count=50&endTime=%s" +
+    private static final String URL_RESULT = "http://route.showapi.com/44-2?code=cqssc&count=50&endTime=%s" +
             "&showapi_appid=31607&showapi_sign=a5858af94b274596b7e175634a2ed269";
 
     private SimpleDateFormat urlDateFormat = new SimpleDateFormat("yyyy-MM-dd%20HH:mm", Locale.getDefault());
@@ -39,8 +41,13 @@ public class SscRequestHandler {
                 try {
                     listener.onRequest(createLotteries(response));
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    Log.e("SscRequestHandler", "Failed to request data", e);
                 }
+            }
+
+            @Override
+            public void onFailed(int what, Response<JSONObject> response) {
+                Log.e("SscRequestHandler", response.toString());
             }
         };
         NoHttpUtils.instance().addRequest(0, request, l);

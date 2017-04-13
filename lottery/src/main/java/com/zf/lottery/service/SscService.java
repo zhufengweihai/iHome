@@ -20,7 +20,7 @@ import static com.zf.lottery.service.impl.SscStatServiceImpl.MAX_NUM;
 public class SscService implements LotteryResultsListener {
     private static final int ONE_MINITE = 60 * 1000;
     private static final int MIN_SIZE = 1000;
-    private static final int MAX_SIZE = 11000;
+    private static final int MAX_SIZE = 21000;
     private static final int SIZE = MAX_SIZE - MIN_SIZE;
 
     private LotteryResultListener listener = null;
