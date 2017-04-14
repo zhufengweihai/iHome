@@ -1,7 +1,7 @@
 package com.zf.lottery.data;
 
 import java.io.Serializable;
-import java.util.Comparator;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -14,8 +14,6 @@ public class Lottery implements Serializable {
     private int[] numbers = null;
     private Date time = null;
     private int sum = -1;
-    private int maxAbence = -1;
-    private int maxGroupAbence = -1;
     private List<Absence> absences = null;
 
     public long getTerm() {
@@ -58,29 +56,24 @@ public class Lottery implements Serializable {
         this.absences = absences;
     }
 
-    public int getMaxAbence() {
-        return maxAbence;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Lottery lottery = (Lottery) o;
+
+        return term == lottery.term;
+
     }
 
-    public void setMaxAbence(int maxAbence) {
-        this.maxAbence = maxAbence;
+    @Override
+    public int hashCode() {
+        return (int) (term ^ (term >>> 32));
     }
 
-    public int getMaxGroupAbence() {
-        return maxGroupAbence;
-    }
-
-    public void setMaxGroupAbence(int maxGroupAbence) {
-        this.maxGroupAbence = maxGroupAbence;
-    }
-
-    public static class LotteryComparator implements Comparator<Lottery> {
-
-        @Override
-        public int compare(Lottery o1, Lottery o2) {
-            if (o1.getMaxAbence() < o2.getMaxAbence()) return -1;
-            if (o1.getMaxAbence() > o2.getMaxAbence()) return 1;
-            return 0;
-        }
+    @Override
+    public String toString() {
+        return "Lottery{" + "term=" + term + ", numbers=" + Arrays.toString(numbers) + ", time=" + time + '}';
     }
 }

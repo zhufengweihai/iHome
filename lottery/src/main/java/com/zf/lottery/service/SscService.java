@@ -20,7 +20,7 @@ import static com.zf.lottery.service.impl.SscStatServiceImpl.MAX_NUM;
 public class SscService implements LotteryResultsListener {
     private static final int ONE_MINITE = 60 * 1000;
     private static final int MIN_SIZE = 1000;
-    private static final int MAX_SIZE = 21000;
+    private static final int MAX_SIZE = 51000;
     private static final int SIZE = MAX_SIZE - MIN_SIZE;
 
     private LotteryResultListener listener = null;
@@ -68,13 +68,12 @@ public class SscService implements LotteryResultsListener {
 
     private void requestNext(List<Lottery> lotteries) {
         Date date = lotteries.get(lotteries.size() - 1).getTime();
-        if (this.lotteries.size() % 900 == 0) {
-            try {
-                Thread.sleep(15000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
+
         requestHandler.requestLottery(new Date(date.getTime() - ONE_MINITE), this);
     }
 

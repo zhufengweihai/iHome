@@ -60,7 +60,10 @@ public class SscRequestHandler {
         List<Lottery> lotteries = new ArrayList<>(50);
         for (int i = 0; i < length; i++) {
             JSONObject result = resultJsonArray.getJSONObject(i);
-            lotteries.add(createLottery(result));
+            Lottery lottery = createLottery(result);
+            if (!lotteries.contains(lottery)) {
+                lotteries.add(lottery);
+            }
         }
         return lotteries;
     }
